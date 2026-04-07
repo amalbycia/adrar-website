@@ -1,36 +1,118 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+# Adrar Website
 
-## Getting Started
+Official website for **Adrar** — a digital marketing agency. Built with **Next.js**, **TypeScript**, and **Sanity CMS**.
 
-First, run the development server:
+---
+
+## 🚀 Getting Started
+
+### 1. Clone the Repository
+
+```bash
+git clone https://github.com/amalbycia/adrar-website.git
+cd adrar-website
+```
+
+### 2. Install Dependencies
+
+```bash
+npm install
+```
+
+### 3. Set Up Environment Variables
+
+Create a `.env.local` file in the root of the project and add the following:
+
+```env
+NEXT_PUBLIC_SANITY_PROJECT_ID=4w668b16
+NEXT_PUBLIC_SANITY_DATASET=production
+```
+
+> ⚠️ This file is not included in the repo for security reasons. You must create it manually.
+
+### 4. Run the Development Server
 
 ```bash
 npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-# or
-bun dev
 ```
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+---
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
+## 🎨 Sanity Studio (CMS)
 
-## Learn More
+The website uses **Sanity** as its content management system.
 
-To learn more about Next.js, take a look at the following resources:
+### Accessing Studio
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+Once the dev server is running, go to:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
+```
+http://localhost:3000/studio
+```
 
-## Deploy on Vercel
+### ⚠️ Getting Access
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+You **must** be added as a member of the Sanity project to use the Studio. Ask the project owner to:
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+1. Go to [sanity.io/manage](https://www.sanity.io/manage)
+2. Open the **Adrar** project
+3. Go to **Members → Invite member**
+4. Enter your email and assign the **Editor** or **Developer** role
+
+Without this, Studio will show a permissions error.
+
+---
+
+## 🗂️ Project Structure
+
+```
+adrar-website/
+├── app/                  # Next.js App Router pages
+│   ├── page.tsx          # Homepage
+│   ├── about/            # About page
+│   ├── services/         # Services page
+│   ├── our-work/         # Portfolio page
+│   ├── contact/          # Contact page
+│   └── studio/           # Sanity Studio (embedded)
+├── components/
+│   ├── home/             # Homepage-specific components
+│   ├── layout/           # Navbar, Footer, etc.
+│   └── shared/           # Reusable UI components
+├── sanity/
+│   ├── schemas/          # Content schemas (what fields exist in CMS)
+│   └── lib/              # Sanity client & queries
+├── public/               # Static assets (images, fonts)
+└── .env.local            # ⚠️ You must create this (see above)
+```
+
+---
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| Next.js 14 | React framework (App Router) |
+| TypeScript | Type safety |
+| Sanity v3 | Headless CMS |
+| GSAP | Animations |
+| Vanilla CSS | Styling |
+
+---
+
+## 📦 Useful Commands
+
+| Command | Description |
+|---|---|
+| `npm run dev` | Start local dev server |
+| `npm run build` | Build for production |
+| `npm run lint` | Run linter |
+
+---
+
+## 🔗 Links
+
+- **Live Site:** *(add URL when deployed)*
+- **Sanity Studio (local):** [http://localhost:3000/studio](http://localhost:3000/studio)
+- **Sanity Manage:** [sanity.io/manage](https://sanity.io/manage)
