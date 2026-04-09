@@ -70,7 +70,12 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-  const settings = await getSiteSettings()
+  let settings = null
+  try {
+    settings = await getSiteSettings()
+  } catch {
+    // Sanity unavailable during build — fall back to null (no logo)
+  }
   const logoUrl = settings?.logo
     ? urlFor(settings.logo).width(240).format('webp').url()
     : null
