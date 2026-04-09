@@ -56,8 +56,80 @@ export default function WhyAdrar() {
           </i>
         </h2>
 
-        {/* Table Container */}
-        <div className="w-full overflow-x-auto pb-8 scrollbar-hide">
+        {/* ── Mobile comparison cards (md:hidden) ── */}
+        <div className="md:hidden flex flex-col gap-4">
+
+          {/* Adrar card — highlighted */}
+          <div className="bg-bor-primary rounded-xl p-5">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-bor-foreground text-white rounded-[10px] flex items-center justify-center shrink-0">
+                <span className="font-heading font-black text-xl tracking-tighter">ad.</span>
+              </div>
+              <div>
+                <h3 className="font-heading font-bold text-[20px] tracking-tight leading-none text-bor-foreground">Adrar</h3>
+                <p className="font-body text-[13px] text-bor-foreground/75 leading-snug mt-0.5">Dubai's full in-house production partner</p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {['Speed', 'Flexibility', 'Quality', 'Scalability', 'Efficiency', 'End-to-End'].map((c) => (
+                <span key={c} className="inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full bg-bor-foreground/15 text-bor-foreground text-[12px] font-body font-semibold">
+                  <Check color="currentColor" /> {c}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* In-house team card */}
+          <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-white/5 rounded-[10px] flex items-center justify-center shrink-0">
+                <UsersIcon />
+              </div>
+              <div>
+                <h3 className="font-heading font-semibold text-[18px] text-white">In-house team</h3>
+                <p className="font-body text-[12.5px] text-white/50 leading-snug mt-0.5">Lacks fabrication bandwidth & machinery</p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { label: 'Speed', ok: false }, { label: 'Flexibility', ok: true },
+                { label: 'Quality', ok: true }, { label: 'Scalability', ok: false },
+                { label: 'Efficiency', ok: false }, { label: 'End-to-End', ok: false },
+              ].map(({ label, ok }) => (
+                <span key={label} className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-body font-semibold ${ok ? 'bg-white/10 text-white' : 'bg-white/4 text-white/35 line-through'}`}>
+                  {ok ? <Check color="white" /> : <Cross color="rgba(255,255,255,0.3)" />} {label}
+                </span>
+              ))}
+            </div>
+          </div>
+
+          {/* Traditional agency card */}
+          <div className="bg-white/5 border border-white/10 rounded-xl p-5">
+            <div className="flex items-center gap-4 mb-4">
+              <div className="w-12 h-12 bg-white/5 rounded-[10px] flex items-center justify-center shrink-0">
+                <AgencyIcon />
+              </div>
+              <div>
+                <h3 className="font-heading font-semibold text-[18px] text-white">Traditional agency</h3>
+                <p className="font-body text-[12.5px] text-white/50 leading-snug mt-0.5">Outsources production — markups & delays</p>
+              </div>
+            </div>
+            <div className="flex flex-wrap gap-2">
+              {[
+                { label: 'Speed', ok: false }, { label: 'Flexibility', ok: false },
+                { label: 'Quality', ok: true }, { label: 'Scalability', ok: true },
+                { label: 'Efficiency', ok: false }, { label: 'End-to-End', ok: false },
+              ].map(({ label, ok }) => (
+                <span key={label} className={`inline-flex items-center gap-1.5 px-3 py-1.5 rounded-full text-[12px] font-body font-semibold ${ok ? 'bg-white/10 text-white' : 'bg-white/4 text-white/35 line-through'}`}>
+                  {ok ? <Check color="white" /> : <Cross color="rgba(255,255,255,0.3)" />} {label}
+                </span>
+              ))}
+            </div>
+          </div>
+        </div>
+
+        {/* ── Desktop table (hidden on mobile) ── */}
+        <div className="hidden md:block w-full overflow-x-auto pb-8 scrollbar-hide">
           <div className="min-w-[900px] flex flex-col gap-2">
             
             {/* Headers row */}

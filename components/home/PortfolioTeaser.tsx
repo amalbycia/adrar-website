@@ -126,138 +126,197 @@ export default function PortfolioTeaser() {
         {/* Carousel */}
         <div className="flex flex-col items-center">
 
-          {/* Stage — perspective wraps the cylinder */}
-          <div
-            className="relative w-full flex items-center justify-center"
-            style={{
-              height: CARD_H + 80,
-              perspective: '1100px',
-              perspectiveOrigin: '50% 50%',
-            }}
-          >
-            {/* Left arrow */}
-            <button
-              onClick={prev}
-              aria-label="Previous project"
-              className="absolute left-2 md:left-8 z-30 flex items-center justify-center w-12 h-12 rounded-full border border-white/15 text-white/60 hover:border-white/40 hover:text-white transition-all duration-200 bg-white/5 hover:bg-white/10"
-            >
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M11 4L6 9l5 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
+          {/* ── Mobile flat card (md:hidden) ── */}
+          <div className="md:hidden w-full">
+            <div className="relative w-full rounded-xl overflow-hidden" style={{ height: 280 }}>
+              <AnimatePresence mode="wait">
+                <motion.img
+                  key={activeIndex}
+                  src={active.image}
+                  alt={active.category}
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  exit={{ opacity: 0 }}
+                  transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                  style={{ width: '100%', height: '100%', objectFit: 'cover', position: 'absolute', inset: 0 }}
+                />
+              </AnimatePresence>
+              <div style={{ position: 'absolute', inset: 0, background: 'linear-gradient(to top, rgba(0,0,0,0.6) 0%, transparent 55%)' }} />
+              {/* Arrows over image */}
+              <button onClick={prev} aria-label="Previous project" className="absolute left-3 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-10 h-10 rounded-full bg-black/40 border border-white/15 text-white/70">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M11 4L6 9l5 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </button>
+              <button onClick={next} aria-label="Next project" className="absolute right-3 top-1/2 -translate-y-1/2 z-10 flex items-center justify-center w-10 h-10 rounded-full bg-black/40 border border-white/15 text-white/70">
+                <svg width="16" height="16" viewBox="0 0 18 18" fill="none"><path d="M7 4l5 5-5 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/></svg>
+              </button>
+            </div>
 
-            {/* Cylinder — this whole div rotates */}
-            <motion.div
+            {/* Description below card */}
+            <div className="mt-6 min-h-[80px]">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, y: 6 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -6 }}
+                  transition={{ duration: 0.25 }}
+                >
+                  <p className="font-body text-[11px] font-bold uppercase tracking-[0.22em] text-bor-primary mb-1.5">{active.category}</p>
+                  <p className="font-heading font-medium text-white text-[18px] leading-snug">{active.description}</p>
+                  <p className="mt-1 font-body text-[12px] text-white/40">{active.client}</p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Dots */}
+            <div className="flex items-center gap-2 mt-4">
+              {projects.map((_, i) => (
+                <button key={i} onClick={() => { const delta = i - activeIndex; setRotation(r => r - delta * ANGLE_STEP); setActiveIndex(i) }} aria-label={`Go to project ${i + 1}`}>
+                  <span className={`block rounded-full transition-all duration-300 ${i === activeIndex ? 'w-6 h-[3px] bg-bor-primary' : 'w-[3px] h-[3px] bg-white/25'}`} />
+                </button>
+              ))}
+            </div>
+            <p className="mt-2 font-body text-[11px] font-medium text-white/25 tabular-nums tracking-widest">
+              {String(activeIndex + 1).padStart(2, '0')} / {String(N).padStart(2, '0')}
+            </p>
+          </div>
+
+          {/* ── Desktop 3D cylinder (hidden on mobile) ── */}
+          <div className="hidden md:flex flex-col items-center w-full">
+            {/* Stage — perspective wraps the cylinder */}
+            <div
+              className="relative w-full flex items-center justify-center"
               style={{
-                width: CARD_W,
-                height: CARD_H,
-                position: 'relative',
-                transformStyle: 'preserve-3d',
+                height: CARD_H + 80,
+                perspective: '1100px',
+                perspectiveOrigin: '50% 50%',
               }}
-              animate={{ rotateY: rotation }}
-              transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
             >
-              {projects.map((project, i) => {
-                const angle = i * ANGLE_STEP
-                return (
-                  <div
-                    key={project.id}
-                    style={{
-                      position: 'absolute',
-                      inset: 0,
-                      transform: `rotateY(${angle}deg) translateZ(${RADIUS}px)`,
-                      backfaceVisibility: 'hidden',
-                      WebkitBackfaceVisibility: 'hidden',
-                      borderRadius: 8,
-                      overflow: 'hidden',
-                    }}
-                  >
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img
-                      src={project.image}
-                      alt={project.category}
-                      style={{
-                        width: '100%',
-                        height: '100%',
-                        objectFit: 'cover',
-                        display: 'block',
-                      }}
-                    />
-                    {/* bottom gradient on active card */}
+              {/* Left arrow */}
+              <button
+                onClick={prev}
+                aria-label="Previous project"
+                className="absolute left-8 z-30 flex items-center justify-center w-12 h-12 rounded-full border border-white/15 text-white/60 hover:border-white/40 hover:text-white transition-all duration-200 bg-white/5 hover:bg-white/10"
+              >
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M11 4L6 9l5 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
+              </button>
+
+              {/* Cylinder — this whole div rotates */}
+              <motion.div
+                style={{
+                  width: CARD_W,
+                  height: CARD_H,
+                  position: 'relative',
+                  transformStyle: 'preserve-3d',
+                }}
+                animate={{ rotateY: rotation }}
+                transition={{ duration: 0.75, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {projects.map((project, i) => {
+                  const angle = i * ANGLE_STEP
+                  return (
                     <div
+                      key={project.id}
                       style={{
                         position: 'absolute',
                         inset: 0,
-                        background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%)',
+                        transform: `rotateY(${angle}deg) translateZ(${RADIUS}px)`,
+                        backfaceVisibility: 'hidden',
+                        WebkitBackfaceVisibility: 'hidden',
+                        borderRadius: 8,
+                        overflow: 'hidden',
                       }}
-                    />
-                  </div>
-                )
-              })}
-            </motion.div>
-
-            {/* Right arrow */}
-            <button
-              onClick={next}
-              aria-label="Next project"
-              className="absolute right-2 md:right-8 z-30 flex items-center justify-center w-12 h-12 rounded-full border border-white/15 text-white/60 hover:border-white/40 hover:text-white transition-all duration-200 bg-white/5 hover:bg-white/10"
-            >
-              <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
-                <path d="M7 4l5 5-5 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </button>
-          </div>
-
-          {/* Active card description */}
-          <div className="mt-10 h-24 flex items-start justify-center w-full">
-            <AnimatePresence mode="wait">
-              <motion.div
-                key={activeIndex}
-                initial={{ opacity: 0, y: 8 }}
-                animate={{ opacity: 1, y: 0 }}
-                exit={{ opacity: 0, y: -8 }}
-                transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
-                className="text-center"
-              >
-                <p className="font-body text-[11px] font-bold uppercase tracking-[0.22em] text-bor-primary mb-2">
-                  {active.category}
-                </p>
-                <p className="font-heading font-medium text-white text-[20px] md:text-[23px] leading-snug">
-                  {active.description}
-                </p>
-                <p className="mt-1 font-body text-[13px] text-white/40">
-                  {active.client}
-                </p>
+                    >
+                      {/* eslint-disable-next-line @next/next/no-img-element */}
+                      <img
+                        src={project.image}
+                        alt={project.category}
+                        style={{
+                          width: '100%',
+                          height: '100%',
+                          objectFit: 'cover',
+                          display: 'block',
+                        }}
+                      />
+                      {/* bottom gradient on active card */}
+                      <div
+                        style={{
+                          position: 'absolute',
+                          inset: 0,
+                          background: 'linear-gradient(to top, rgba(0,0,0,0.55) 0%, transparent 55%)',
+                        }}
+                      />
+                    </div>
+                  )
+                })}
               </motion.div>
-            </AnimatePresence>
-          </div>
 
-          {/* Dot indicators */}
-          <div className="flex items-center gap-2 mt-5">
-            {projects.map((_, i) => (
+              {/* Right arrow */}
               <button
-                key={i}
-                onClick={() => {
-                  const delta = i - activeIndex
-                  setRotation(r => r - delta * ANGLE_STEP)
-                  setActiveIndex(i)
-                }}
-                aria-label={`Go to project ${i + 1}`}
+                onClick={next}
+                aria-label="Next project"
+                className="absolute right-8 z-30 flex items-center justify-center w-12 h-12 rounded-full border border-white/15 text-white/60 hover:border-white/40 hover:text-white transition-all duration-200 bg-white/5 hover:bg-white/10"
               >
-                <span
-                  className={`block rounded-full transition-all duration-300 ${
-                    i === activeIndex
-                      ? 'w-6 h-[3px] bg-bor-primary'
-                      : 'w-[3px] h-[3px] bg-white/25 hover:bg-white/50'
-                  }`}
-                />
+                <svg width="18" height="18" viewBox="0 0 18 18" fill="none">
+                  <path d="M7 4l5 5-5 5" stroke="currentColor" strokeWidth="1.7" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </button>
-            ))}
+            </div>
+
+            {/* Active card description */}
+            <div className="mt-10 h-24 flex items-start justify-center w-full">
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={activeIndex}
+                  initial={{ opacity: 0, y: 8 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.28, ease: [0.22, 1, 0.36, 1] }}
+                  className="text-center"
+                >
+                  <p className="font-body text-[11px] font-bold uppercase tracking-[0.22em] text-bor-primary mb-2">
+                    {active.category}
+                  </p>
+                  <p className="font-heading font-medium text-white text-[23px] leading-snug">
+                    {active.description}
+                  </p>
+                  <p className="mt-1 font-body text-[13px] text-white/40">
+                    {active.client}
+                  </p>
+                </motion.div>
+              </AnimatePresence>
+            </div>
+
+            {/* Dot indicators */}
+            <div className="flex items-center gap-2 mt-5">
+              {projects.map((_, i) => (
+                <button
+                  key={i}
+                  onClick={() => {
+                    const delta = i - activeIndex
+                    setRotation(r => r - delta * ANGLE_STEP)
+                    setActiveIndex(i)
+                  }}
+                  aria-label={`Go to project ${i + 1}`}
+                >
+                  <span
+                    className={`block rounded-full transition-all duration-300 ${
+                      i === activeIndex
+                        ? 'w-6 h-[3px] bg-bor-primary'
+                        : 'w-[3px] h-[3px] bg-white/25 hover:bg-white/50'
+                    }`}
+                  />
+                </button>
+              ))}
+            </div>
+
+            <p className="mt-3 font-body text-[11px] font-medium text-white/25 tabular-nums tracking-widest">
+              {String(activeIndex + 1).padStart(2, '0')} / {String(N).padStart(2, '0')}
+            </p>
           </div>
 
-          <p className="mt-3 font-body text-[11px] font-medium text-white/25 tabular-nums tracking-widest">
-            {String(activeIndex + 1).padStart(2, '0')} / {String(N).padStart(2, '0')}
-          </p>
         </div>
 
         {/* Bottom bar */}

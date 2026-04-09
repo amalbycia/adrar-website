@@ -44,7 +44,7 @@ export default function FloatingCTA() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.95 }}
           transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-          className="fixed bottom-6 right-6 md:bottom-8 md:right-10 z-50"
+          className="fixed z-50 bottom-4 left-1/2 -translate-x-1/2 md:bottom-8 md:right-10 md:left-auto md:translate-x-0"
         >
           <Link
             href="/contact"

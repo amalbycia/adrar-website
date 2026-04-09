@@ -77,8 +77,7 @@ export default function ServicesSnapshot() {
           {serviceRows.map((row, rowIdx) => (
             <div
               key={rowIdx}
-              className="flex flex-wrap gap-2.5"
-              style={{ paddingLeft: rowIdx % 2 === 1 ? '2rem' : '0' }}
+              className={`flex flex-wrap gap-2.5 ${rowIdx % 2 === 1 ? 'sm:pl-8' : ''}`}
             >
               {row.map((service) => (
                 <Link

@@ -55,25 +55,21 @@ export default function TrustBar() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 py-16 md:py-24">
               
               {/* Stat 1 */}
-              <div className="flex items-center justify-between gap-8 md:pr-12">
-                <div className="flex flex-col gap-4">
-                  <p className="font-body text-[15px] text-white/70 leading-[1.6] max-w-[280px]">
-                    {stats[0].description}
-                  </p>
-                </div>
-                <span className="font-serif font-normal text-white tracking-[-3px] shrink-0" style={{ fontSize: 'clamp(72px, 8vw, 120px)' }}>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-8 md:pr-12">
+                <p className="font-body text-[15px] text-white/70 leading-[1.6] max-w-[280px]">
+                  {stats[0].description}
+                </p>
+                <span className="font-serif font-normal text-white tracking-[-3px] shrink-0" style={{ fontSize: 'clamp(52px, 16vw, 120px)' }}>
                   {stats[0].value}
                 </span>
               </div>
 
               {/* Stat 2 */}
-              <div className="flex items-center justify-between gap-8 md:pl-12">
-                <div className="flex flex-col gap-4">
-                  <p className="font-body text-[15px] text-white/70 leading-[1.6] max-w-[280px]">
-                    {stats[1].description}
-                  </p>
-                </div>
-                <span className="font-serif font-normal text-white tracking-[-3px] shrink-0" style={{ fontSize: 'clamp(72px, 8vw, 120px)' }}>
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-8 md:pl-12">
+                <p className="font-body text-[15px] text-white/70 leading-[1.6] max-w-[280px]">
+                  {stats[1].description}
+                </p>
+                <span className="font-serif font-normal text-white tracking-[-3px] shrink-0" style={{ fontSize: 'clamp(52px, 16vw, 120px)' }}>
                   {stats[1].value}
                 </span>
               </div>
@@ -86,7 +82,7 @@ export default function TrustBar() {
             <div className="grid grid-cols-1 md:grid-cols-2 gap-12 md:gap-20 py-16 md:py-24">
               
               {/* Stat 3 */}
-              <div className="flex items-center justify-between gap-8 md:pr-12">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-8 md:pr-12">
                 <div className="flex flex-col gap-4">
                   <p className="font-body text-[15px] text-white/70 leading-[1.6] max-w-[280px]">
                     {stats[2].description}
@@ -97,13 +93,13 @@ export default function TrustBar() {
                     </Link>
                   )}
                 </div>
-                <span className="font-serif font-normal text-white tracking-[-3px] shrink-0" style={{ fontSize: 'clamp(72px, 8vw, 120px)' }}>
+                <span className="font-serif font-normal text-white tracking-[-3px] shrink-0" style={{ fontSize: 'clamp(52px, 16vw, 120px)' }}>
                   {stats[2].value}
                 </span>
               </div>
 
               {/* Stat 4 */}
-              <div className="flex items-center justify-between gap-8 md:pl-12">
+              <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between sm:gap-8 md:pl-12">
                 <div className="flex flex-col gap-4">
                   <p className="font-body text-[15px] text-white/70 leading-[1.6] max-w-[280px]">
                     {stats[3].description}
@@ -114,7 +110,7 @@ export default function TrustBar() {
                     </Link>
                   )}
                 </div>
-                <span className="font-serif font-normal text-white tracking-[-3px] shrink-0 leading-[0.9]" style={{ fontSize: 'clamp(56px, 6vw, 100px)' }}>
+                <span className="font-serif font-normal text-white tracking-[-3px] shrink-0 leading-[0.9]" style={{ fontSize: 'clamp(48px, 14vw, 100px)' }}>
                   {stats[3].value}
                 </span>
               </div>
