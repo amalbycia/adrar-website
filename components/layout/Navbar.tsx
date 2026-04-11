@@ -80,12 +80,12 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
   }, [drawerOpen, menuOpen])
 
   const logoNode = logoUrl
-    ? <Image src={logoUrl} alt={logoAlt} width={100} height={32} className="h-8 w-auto object-contain" priority />
+    ? <Image src={logoUrl} alt={logoAlt} width={160} height={56} className="h-[56px] w-auto object-contain" priority />
     : <span className="font-heading font-black text-white tracking-tight" style={{ fontSize: 20 }}>adrar</span>
 
   const pillLogo = logoUrl
-    ? <Image src={logoUrl} alt={logoAlt} width={72} height={22} className="h-[22px] w-auto object-contain" />
-    : <span style={{ fontSize: 19, letterSpacing: '-0.01em' }}>adrar</span>
+    ? <Image src={logoUrl} alt={logoAlt} width={100} height={32} className="h-[32px] w-auto object-contain" />
+    : <span className="font-heading font-black text-white" style={{ fontSize: 19, letterSpacing: '-0.01em' }}>adrar</span>
 
   return (
     <>
@@ -242,7 +242,7 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
                     style={{ fontSize: 18, letterSpacing: '-0.01em' }}
                   >
                     {logoUrl
-                      ? <Image src={logoUrl} alt={logoAlt} width={72} height={22} className="h-[22px] w-auto object-contain" />
+                      ? <Image src={logoUrl} alt={logoAlt} width={90} height={28} className="h-[28px] w-auto object-contain" />
                       : 'adrar'
                     }
                   </Link>

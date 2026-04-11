@@ -19,6 +19,13 @@ export default defineType({
       type: 'string',
       initialValue: 'Adrar Advertising LLC',
     }),
+    defineField({
+      name: 'footerBg',
+      title: 'Footer Background Image',
+      type: 'image',
+      description: 'Upload the background image for the footer (Dubai skyline).',
+      options: { hotspot: true },
+    }),
   ],
   preview: {
     prepare: () => ({ title: 'Site Settings' }),

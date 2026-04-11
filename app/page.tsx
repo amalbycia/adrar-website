@@ -3,7 +3,8 @@ import LogoStrip from '@/components/home/LogoStrip'
 import TrustBar from '@/components/home/TrustBar'
 import WhyAdrar from '@/components/home/WhyAdrar'
 import Testimonials from '@/components/home/Testimonials'
-import { getTestimonials, getHeroGallery, getClientLogos } from '@/sanity/lib/queries'
+import PortfolioTeaser from '@/components/home/PortfolioTeaser'
+import { getTestimonials, getHeroGallery, getFeaturedProjects } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
 import type { SanityHeroCard } from '@/sanity/lib/queries'
 
@@ -20,13 +21,12 @@ function resolveCard(card: SanityHeroCard | undefined, isFeature = false) {
 }
 
 export default async function HomePage() {
-  const [testimonials, heroGallery, clientLogos] = await Promise.all([
+  const [testimonials, heroGallery, featuredProjects] = await Promise.all([
     getTestimonials(),
     getHeroGallery(),
-    getClientLogos(),
+    getFeaturedProjects(),
   ])
 
-  // Build hero cards in exact slot order matching the masonry STRUCTURE
   const heroCards = {
     col1: [
       resolveCard(heroGallery?.col1_a),
@@ -35,7 +35,7 @@ export default async function HomePage() {
       resolveCard(heroGallery?.col1_d),
     ],
     col2: [
-      resolveCard(heroGallery?.col2_feature, true), // ← feature card slot
+      resolveCard(heroGallery?.col2_feature, true),
       resolveCard(heroGallery?.col2_b),
       resolveCard(heroGallery?.col2_c),
     ],
@@ -47,17 +47,24 @@ export default async function HomePage() {
     ],
   }
 
-  const logoItems = clientLogos.map((l) => ({
-    name: l.name,
-    url: urlFor(l.logo).height(80).format('webp').url(),
+
+
+  const portfolioItems = featuredProjects.map((p) => ({
+    id: p._id,
+    title: p.title,
+    client: p.client,
+    category: p.category,
+    description: p.description ?? '',
+    imageUrl: urlFor(p.image).width(800).height(1060).format('webp').quality(90).url(),
   }))
 
   return (
     <>
       <Hero heroCards={heroCards} />
-      <LogoStrip logos={logoItems} />
+      <LogoStrip />
       <TrustBar />
-<WhyAdrar />
+      <WhyAdrar />
+      <PortfolioTeaser projects={portfolioItems} />
       <Testimonials testimonials={testimonials} />
     </>
   )

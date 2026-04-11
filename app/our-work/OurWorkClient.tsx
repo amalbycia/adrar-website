@@ -32,9 +32,16 @@ const PERSPECTIVE = 1000
 
 export default function OurWorkClient({ projects: sanityProjects }: { projects?: ProjectItem[] }) {
   const projects = (sanityProjects && sanityProjects.length > 0) ? sanityProjects : STATIC_PROJECTS
-  const N = projects.length
+  const N = Math.max(1, projects.length)
   const ANGLE_STEP = 360 / N
-  const RADIUS = Math.round((CARD_W / 2) / Math.tan(Math.PI / N)) + 50
+  
+  let RADIUS = 300
+  if (N > 2) {
+    RADIUS = Math.round((CARD_W / 2) / Math.tan(Math.PI / N)) + 60
+  } else if (N === 2) {
+    RADIUS = 160
+  }
+  RADIUS = Math.max(RADIUS, Math.ceil(CARD_W / 2) + 20)
   const [rotation, setRotation] = useState(0)
   const [activeIndex, setActiveIndex] = useState(0)
   const [dragging, setDragging] = useState(false)
@@ -162,7 +169,8 @@ export default function OurWorkClient({ projects: sanityProjects }: { projects?:
                   position: 'relative',
                   transformStyle: 'preserve-3d',
                 }}
-                animate={{ rotateY: rotation }}
+                initial={{ z: -RADIUS, rotateY: rotation }}
+                animate={{ z: -RADIUS, rotateY: rotation }}
                 transition={
                   dragging
                     ? { duration: 0 }

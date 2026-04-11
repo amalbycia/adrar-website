@@ -86,9 +86,10 @@ function IconFacebook() {
 interface FooterProps {
   logoUrl?: string | null
   logoAlt?: string
+  footerBgUrl?: string | null
 }
 
-export default function Footer({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: FooterProps) {
+export default function Footer({ logoUrl, logoAlt = 'Adrar Advertising LLC', footerBgUrl }: FooterProps) {
   return (
     <footer id="site-footer" className="bg-[#111111] text-white">
 
@@ -96,7 +97,7 @@ export default function Footer({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: F
       <div className="relative w-full overflow-hidden" style={{ height: 'clamp(380px, 50vw, 560px)' }}>
         {/* Dubai skyline background */}
         <Image
-          src="/dubai-skyline.jpg"
+          src={footerBgUrl || "/dubai-skyline.jpg"}
           alt="Dubai skyline at night"
           fill
           priority
@@ -253,9 +254,9 @@ export default function Footer({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: F
                 <Image
                   src={logoUrl}
                   alt={logoAlt}
-                  width={140}
-                  height={44}
-                  className="h-10 w-auto object-contain brightness-0 invert"
+                  width={240}
+                  height={76}
+                  className="h-20 w-auto object-contain brightness-0 invert"
                 />
               ) : (
                 <span className="font-heading font-black text-3xl text-white tracking-tighter">

@@ -76,10 +76,14 @@ export default async function RootLayout({
   } catch {
     // Sanity unavailable during build — fall back to null (no logo)
   }
-  const logoUrl = settings?.logo
-    ? urlFor(settings.logo).width(240).format('webp').url()
-    : null
+  
+  // Hardcoded to exact user supplied logo
+  const logoUrl = '/adrar-logo-new.png'
   const logoAlt = settings?.logoAlt ?? 'Adrar Advertising LLC'
+  
+  const footerBgUrl = settings?.footerBg
+    ? urlFor(settings.footerBg).width(2400).format('webp').quality(80).url()
+    : null
 
   return (
     <html lang="en" className={`${interTight.variable} ${instrumentSerif.variable}`}>
@@ -93,7 +97,7 @@ export default async function RootLayout({
         <LenisProvider>
           <Navbar logoUrl={logoUrl} logoAlt={logoAlt} />
           <main>{children}</main>
-          <Footer logoUrl={logoUrl} logoAlt={logoAlt} />
+          <Footer logoUrl={logoUrl} logoAlt={logoAlt} footerBgUrl={footerBgUrl} />
           <WhatsAppButton />
           <FloatingCTA />
         </LenisProvider>

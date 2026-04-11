@@ -33,11 +33,12 @@ export interface SanityClientLogo {
 export interface SanitySettings {
   logo?: { asset: { _ref: string } }
   logoAlt?: string
+  footerBg?: { asset: { _ref: string } }
 }
 
 export const getSiteSettings = unstable_cache(
   async (): Promise<SanitySettings | null> => {
-    return client.fetch(`*[_type == "siteSettings"][0] { logo, logoAlt }`)
+    return client.fetch(`*[_type == "siteSettings"][0] { logo, logoAlt, footerBg }`)
   },
   ['site-settings'],
   { revalidate: 3600, tags: ['site-settings'] }
@@ -65,62 +66,72 @@ export interface SanityHeroGallery {
   col3_d?: SanityHeroCard
 }
 
-export async function getHeroGallery(): Promise<SanityHeroGallery | null> {
-  return client.fetch(
-    `*[_type == "heroGallery"][0] {
-      col1_a { image, overlayLogo, altText },
-      col1_b { image, overlayLogo, altText },
-      col1_c { image, overlayLogo, altText },
-      col1_d { image, overlayLogo, altText },
-      col2_feature { image, overlayLogo, altText },
-      col2_b { image, overlayLogo, altText },
-      col2_c { image, overlayLogo, altText },
-      col3_a { image, overlayLogo, altText },
-      col3_b { image, overlayLogo, altText },
-      col3_c { image, overlayLogo, altText },
-      col3_d { image, overlayLogo, altText }
-    }`,
-    {},
-    { next: { revalidate: 3600, tags: ['hero-gallery'] } }
-  )
-}
+export const getHeroGallery = unstable_cache(
+  async (): Promise<SanityHeroGallery | null> => {
+    return client.fetch(
+      `*[_type == "heroGallery"][0] {
+        col1_a { image, overlayLogo, altText },
+        col1_b { image, overlayLogo, altText },
+        col1_c { image, overlayLogo, altText },
+        col1_d { image, overlayLogo, altText },
+        col2_feature { image, overlayLogo, altText },
+        col2_b { image, overlayLogo, altText },
+        col2_c { image, overlayLogo, altText },
+        col3_a { image, overlayLogo, altText },
+        col3_b { image, overlayLogo, altText },
+        col3_c { image, overlayLogo, altText },
+        col3_d { image, overlayLogo, altText }
+      }`
+    )
+  },
+  ['hero-gallery'],
+  { revalidate: 3600, tags: ['hero-gallery'] }
+)
 
-export async function getTestimonials(): Promise<SanityTestimonial[]> {
-  return client.fetch(
-    `*[_type == "testimonial"] | order(order asc) {
-      _id, name, role, company, quote, order
-    }`,
-    {},
-    { next: { revalidate: 3600, tags: ['testimonials'] } }
-  )
-}
+export const getTestimonials = unstable_cache(
+  async (): Promise<SanityTestimonial[]> => {
+    return client.fetch(
+      `*[_type == "testimonial"] | order(order asc) {
+        _id, name, role, company, quote, order
+      }`
+    )
+  },
+  ['testimonials'],
+  { revalidate: 3600, tags: ['testimonials'] }
+)
 
-export async function getFeaturedProjects(): Promise<SanityProject[]> {
-  return client.fetch(
-    `*[_type == "project" && featured == true] | order(order asc) {
-      _id, title, client, category, image, featured, heroFeatureCard, heroOverlayLogo, order
-    }`,
-    {},
-    { next: { revalidate: 3600, tags: ['projects'] } }
-  )
-}
+export const getFeaturedProjects = unstable_cache(
+  async (): Promise<SanityProject[]> => {
+    return client.fetch(
+      `*[_type == "project" && featured == true] | order(order asc) {
+        _id, title, client, category, image, featured, heroFeatureCard, heroOverlayLogo, order
+      }`
+    )
+  },
+  ['featured-projects'],
+  { revalidate: 3600, tags: ['projects'] }
+)
 
-export async function getAllProjects(): Promise<SanityProject[]> {
-  return client.fetch(
-    `*[_type == "project"] | order(order asc) {
-      _id, title, client, category, description, image, featured, order
-    }`,
-    {},
-    { next: { revalidate: 3600, tags: ['projects'] } }
-  )
-}
+export const getAllProjects = unstable_cache(
+  async (): Promise<SanityProject[]> => {
+    return client.fetch(
+      `*[_type == "project"] | order(order asc) {
+        _id, title, client, category, description, image, featured, order
+      }`
+    )
+  },
+  ['all-projects'],
+  { revalidate: 3600, tags: ['projects'] }
+)
 
-export async function getClientLogos(): Promise<SanityClientLogo[]> {
-  return client.fetch(
-    `*[_type == "clientLogo"] | order(order asc) {
-      _id, name, logo, order
-    }`,
-    {},
-    { next: { revalidate: 3600, tags: ['client-logos'] } }
-  )
-}
+export const getClientLogos = unstable_cache(
+  async (): Promise<SanityClientLogo[]> => {
+    return client.fetch(
+      `*[_type == "clientLogo"] | order(order asc) {
+        _id, name, logo, order
+      }`
+    )
+  },
+  ['client-logos'],
+  { revalidate: 3600, tags: ['client-logos'] }
+)

@@ -68,7 +68,7 @@ export default function Hero({ heroCards }: HeroProps) {
     buildColumn(COL2_HEIGHTS, COL2_TEXTS, col3Cards),
   ]
 
-  const loopCols = cols.map((col) => [...col, ...col, ...col, ...col])
+  const loopCols = cols.map((col) => [...col, ...col])
 
   return (
     <section
