@@ -25,44 +25,156 @@ const instrumentSerif = Instrument_Serif({
 })
 
 export const metadata: Metadata = {
-  title: 'Adrar Advertising LLC — Signage, Branding & Printing Dubai',
+  metadataBase: new URL('https://adraradvertising.com'),
+  title: {
+    default: 'Adrar Advertising LLC — Signage, Branding & Printing Dubai',
+    template: '%s | Adrar Advertising'
+  },
   description:
-    "Dubai's leading advertising, branding, signage and large-format printing company since 2000. In-house production in Al Qusais. Get a quote today.",
+    "Dubai's premier advertising, branding, signage and large-format printing company. Operating since 2000, specializing in vehicle branding, LED signs, 3D signs.",
   keywords: [
-    'advertising company Dubai',
-    'signage company Dubai',
-    'branding company Dubai',
-    'digital printing Dubai',
-    'vehicle branding Dubai',
-    'LED signs Dubai',
+    'best advertising company Dubai',
+    'leading signage company Dubai',
+    'vehicle wrapping Dubai',
+    'LED sign board manufacturers Dubai',
+    'large format digital printing UAE',
+    'exhibition stands Dubai',
+    '3D signage fabrication Al Qusais'
   ],
+  authors: [{ name: 'Adrar Advertising LLC' }],
+  creator: 'Adrar Advertising LLC',
+  publisher: 'Adrar Advertising LLC',
+  formatDetection: {
+    email: false,
+    address: false,
+    telephone: false,
+  },
+  alternates: {
+    canonical: '/',
+  },
   openGraph: {
     title: 'Adrar Advertising LLC — Signage, Branding & Printing Dubai',
     description:
-      "Dubai's leading advertising, branding, signage and large-format printing company since 2000.",
-    type: 'website',
+      "Dubai's premier advertising, branding, signage and large-format printing company since 2000.",
+    url: 'https://adraradvertising.com',
+    siteName: 'Adrar Advertising LLC',
+    images: [
+      {
+        url: '/dubai-skyline.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'Adrar Advertising LLC - Signage and Branding in Dubai',
+      },
+    ],
     locale: 'en_AE',
+    type: 'website',
   },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Adrar Advertising LLC — Signage & Branding Dubai',
+    description: "Dubai's leading advertising, signage and printing company since 2000.",
+    images: ['/dubai-skyline.jpg'],
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
+  verification: {
+    google: 'placeholder-google-site-verification', // Can replace when user provides
+  },
+  category: 'Advertising & Marketing Services',
 }
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
-  '@type': 'LocalBusiness',
-  name: 'Adrar Advertising Requisites LLC',
-  alternateName: 'Adrar Advertising LLC',
-  description:
-    "Dubai's leading advertising, branding, signage and large-format printing company since 2000.",
-  address: {
-    '@type': 'PostalAddress',
-    streetAddress: 'Al Qusais',
-    addressLocality: 'Dubai',
-    addressCountry: 'AE',
-    postalCode: '234176',
-  },
-  telephone: '+97142587553',
-  email: 'sales@flashinkjet.com',
-  foundingDate: '2000',
-  areaServed: 'Dubai, UAE',
+  '@graph': [
+    {
+      '@type': 'LocalBusiness',
+      '@id': 'https://adraradvertising.com/#business',
+      name: 'Adrar Advertising Requisites LLC',
+      alternateName: 'Adrar Advertising LLC',
+      description: "Dubai's premier advertising, branding, signage, and large-format printing company. Operating since 2000, specializing in vehicle branding, LED signs, 3D signs, offset printing, and event collateral.",
+      url: 'https://adraradvertising.com',
+      logo: 'https://adraradvertising.com/adrar-logo-new.png',
+      image: 'https://adraradvertising.com/dubai-skyline.jpg',
+      priceRange: '$$',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Industrial Area 4, Al Qusais',
+        addressLocality: 'Dubai',
+        addressRegion: 'Dubai Emirate',
+        addressCountry: 'AE',
+        postalCode: '234176',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '25.2861',
+        longitude: '55.3794'
+      },
+      telephone: '+97142587553',
+      email: 'sales@flashinkjet.com',
+      foundingDate: '2000',
+      foundingLocation: {
+        '@type': 'Place',
+        name: 'Dubai, UAE'
+      },
+      areaServed: [
+        { '@type': 'City', name: 'Dubai' },
+        { '@type': 'City', name: 'Abu Dhabi' },
+        { '@type': 'City', name: 'Sharjah' },
+        { '@type': 'Country', name: 'United Arab Emirates' }
+      ],
+      hasOfferCatalog: {
+        '@type': 'OfferCatalog',
+        name: 'Advertising & Printing Services',
+        itemListElement: [
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Signage & LED' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Vehicle Branding & Wrapping' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Large Format Printing' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Retail & Event Activation' } }
+        ]
+      },
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          opens: '09:00',
+          closes: '18:00'
+        }
+      ],
+      sameAs: [
+        'https://wa.me/971552217026'
+      ]
+    },
+    {
+      '@type': 'FAQPage',
+      mainEntity: [
+        {
+          '@type': 'Question',
+          name: 'Who is the best advertising and signage company in Dubai?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Adrar Advertising LLC has been widely recognized as one of the best and most reliable advertising, branding, and signage companies in Dubai since its establishment in 2000. They handle entirely in-house production in Al Qusais.'
+          }
+        },
+        {
+          '@type': 'Question',
+          name: 'Does Adrar Advertising offer vehicle vehicle wrapping and branding in Dubai?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes, Adrar Advertising LLC specializes in RTA-approved vehicle wrapping and full fleet branding in Dubai and across the UAE.'
+          }
+        }
+      ]
+    }
+  ]
 }
 
 export default async function RootLayout({
