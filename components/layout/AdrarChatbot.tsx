@@ -144,7 +144,7 @@ export default function AdrarChatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 16, scale: 0.97 }}
             transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-            className="fixed bottom-28 right-4 md:right-8 z-50 w-[calc(100vw-2rem)] max-w-[380px] rounded-2xl overflow-hidden shadow-2xl"
+            className="fixed bottom-28 left-4 md:bottom-32 md:left-10 z-50 w-[calc(100vw-2rem)] max-w-[380px] rounded-2xl overflow-hidden shadow-2xl"
             style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.45)' }}
           >
             {/* Header */}
@@ -155,12 +155,12 @@ export default function AdrarChatbot() {
               {/* Avatar */}
               <div className="relative flex-shrink-0">
                 <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white text-lg font-bold">
-                  A
+                  J
                 </div>
                 <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-white rounded-full" />
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-white font-semibold text-sm leading-tight truncate">Amir</p>
+                <p className="text-white font-semibold text-sm leading-tight truncate">John</p>
                 <p className="text-white/75 text-xs leading-tight">Adrar AI Assistant · Online</p>
               </div>
               <button
@@ -270,10 +270,9 @@ export default function AdrarChatbot() {
         transition={{ delay: 2.5, duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
         whileHover={{ scale: 1.08 }}
         whileTap={{ scale: 0.93 }}
-        className="fixed bottom-6 right-4 md:bottom-8 md:right-8 z-50 w-14 h-14 rounded-full flex items-center justify-center shadow-xl"
+        className="fixed bottom-24 left-6 md:bottom-28 md:left-10 z-50 w-14 h-14 rounded-full items-center justify-center shadow-xl chat-glow"
         style={{
           background: 'linear-gradient(135deg, #E8500A 0%, #c43d06 100%)',
-          boxShadow: '0 8px 32px rgba(232,80,10,0.45)',
           display: isOpen ? 'none' : 'flex',
         }}
       >
@@ -283,9 +282,9 @@ export default function AdrarChatbot() {
             d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"
             fill="white"
           />
-          <circle cx="8" cy="11" r="1.2" fill="#E8500A" />
-          <circle cx="12" cy="11" r="1.2" fill="#E8500A" />
-          <circle cx="16" cy="11" r="1.2" fill="#E8500A" />
+          <circle cx="8" cy="11" r="1.2" fill="#c43d06" />
+          <circle cx="12" cy="11" r="1.2" fill="#c43d06" />
+          <circle cx="16" cy="11" r="1.2" fill="#c43d06" />
         </svg>
 
         {/* Unread badge */}
@@ -301,11 +300,18 @@ export default function AdrarChatbot() {
         </AnimatePresence>
       </motion.button>
 
-      {/* Typing dot keyframes */}
+      {/* Keyframes */}
       <style>{`
         @keyframes chatDot {
           0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
           40% { transform: translateY(-5px); opacity: 1; }
+        }
+        @keyframes chatGlow {
+          0%, 100% { box-shadow: 0 0 0 0 rgba(232,80,10,0), 0 8px 24px rgba(232,80,10,0.4); }
+          50%       { box-shadow: 0 0 0 10px rgba(232,80,10,0), 0 8px 28px rgba(232,80,10,0.65); }
+        }
+        .chat-glow {
+          animation: chatGlow 3s ease-in-out infinite;
         }
       `}</style>
     </>
