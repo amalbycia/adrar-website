@@ -6,6 +6,7 @@ import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
 import WhatsAppButton from '@/components/layout/WhatsAppButton'
 import FloatingCTA from '@/components/layout/FloatingCTA'
+import AdrarChatbot from '@/components/layout/AdrarChatbot'
 import { getSiteSettings } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
 
@@ -212,6 +213,7 @@ export default async function RootLayout({
           <Footer logoUrl={logoUrl} logoAlt={logoAlt} footerBgUrl={footerBgUrl} />
           <WhatsAppButton />
           <FloatingCTA />
+          <AdrarChatbot />
         </LenisProvider>
       </body>
     </html>
