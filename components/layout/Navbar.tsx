@@ -338,15 +338,18 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
                 </svg>
               </button>
 
-              <nav className="flex flex-col gap-8">
+              <nav className="flex flex-col">
                 {drawerLinks.map((link) => (
                   <Link
                     key={link.href}
                     href={link.href}
-                    className="text-[16px] font-body font-semibold uppercase tracking-[0.1em] text-white/50 hover:text-bor-primary transition-colors"
+                    className="flex items-center justify-between py-4 border-b border-white/10 text-[16px] font-body font-semibold uppercase tracking-[0.1em] text-white/50 hover:text-bor-primary transition-colors"
                     onClick={() => setDrawerOpen(false)}
                   >
                     {link.label}
+                    <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="opacity-30">
+                      <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    </svg>
                   </Link>
                 ))}
               </nav>

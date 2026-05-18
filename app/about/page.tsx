@@ -5,15 +5,14 @@ import Button from '@/components/shared/Button'
 import { stats } from '@/data/stats'
 
 export const metadata: Metadata = {
-  title: 'About � Adrar Advertising LLC Dubai',
-  description:
-    'Learn about Adrar Advertising LLC � established in 2000, based in Al Qusais Dubai, with 25+ years of in-house advertising, signage and branding production.',
+  title: 'About Adrar Advertising LLC — 25 Years in Dubai',
+  description: 'Adrar Advertising LLC has been Dubai\'s trusted advertising and signage partner since 2000. 100% in-house production in Al Qusais. LED signs, vehicle branding, printing and mall activation — no outsourcing.',
 }
 
 export default function AboutPage() {
   return (
     <div className="pt-24 md:pt-32 pb-24 md:pb-32">
-      <div className="max-w-[1600px] mx-auto px-6">
+      <div className="max-w-[1280px] mx-auto px-6">
         {/* Hero */}
         <div className="py-16 md:py-20 max-w-3xl">
           <SectionHeading

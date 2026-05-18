@@ -180,7 +180,7 @@ export default function Hero({ heroCards }: HeroProps) {
                           src={card.url}
                           alt={card.alt || 'Project image'}
                           fill
-                          sizes="15vw"
+                          sizes="(max-width: 1024px) 0vw, 15vw"
                           className="object-cover transition-transform duration-700 ease-[cubic-bezier(0.25,1,0.5,1)] group-hover:scale-[1.05]"
                         />
                       )}

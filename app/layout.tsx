@@ -15,6 +15,8 @@ const interTight = Inter_Tight({
   variable: '--font-sans',
   display: 'swap',
   weight: ['400', '500', '600', '700'],
+  preload: true,
+  adjustFontFallback: false,
 })
 
 const instrumentSerif = Instrument_Serif({
@@ -23,89 +25,93 @@ const instrumentSerif = Instrument_Serif({
   display: 'swap',
   weight: '400',
   style: ['normal', 'italic'],
+  preload: true,
+  adjustFontFallback: false,
 })
+
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: '#111111',
+}
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://adraradvertising.com'),
   title: {
     default: 'Adrar Advertising LLC — Signage, Branding & Printing Dubai',
-    template: '%s | Adrar Advertising'
+    template: '%s | Adrar Advertising LLC Dubai',
   },
-  description:
-    "Dubai's premier advertising, branding, signage and large-format printing company. Operating since 2000, specializing in vehicle branding, LED signs, 3D signs.",
+  description: "Adrar Advertising LLC — Dubai's leading full-service advertising company since 2000. LED signs, vehicle branding, large format printing, mall activation and retail display. 100% in-house production in Al Qusais, Dubai. Call +97142587553.",
   keywords: [
-    'best advertising company Dubai',
-    'leading signage company Dubai',
+    'advertising company Dubai',
+    'signage company Dubai',
+    'branding company Dubai',
+    'digital printing Dubai',
+    'vehicle branding Dubai',
+    'LED signs Dubai',
+    'mall activation Dubai',
+    'large format printing Dubai',
+    'retail display Dubai',
+    '3D signs Dubai',
     'vehicle wrapping Dubai',
-    'LED sign board manufacturers Dubai',
-    'large format digital printing UAE',
-    'exhibition stands Dubai',
-    '3D signage fabrication Al Qusais'
+    'in-store branding Dubai',
+    'Al Qusais advertising',
+    'outdoor advertising Dubai',
+    'hoarding Dubai',
   ],
-  authors: [{ name: 'Adrar Advertising LLC' }],
+  authors: [{ name: 'Adrar Advertising LLC', url: 'https://adraradvertising.com' }],
   creator: 'Adrar Advertising LLC',
   publisher: 'Adrar Advertising LLC',
-  formatDetection: {
-    email: false,
-    address: false,
-    telephone: false,
-  },
-  alternates: {
-    canonical: '/',
-  },
+  formatDetection: { email: false, address: false, telephone: false },
+  alternates: { canonical: '/' },
   openGraph: {
     title: 'Adrar Advertising LLC — Signage, Branding & Printing Dubai',
-    description:
-      "Dubai's premier advertising, branding, signage and large-format printing company since 2000.",
+    description: "Dubai's leading advertising company since 2000. LED signs, vehicle branding, large format printing, mall activation. 100% in-house, Al Qusais Dubai.",
     url: 'https://adraradvertising.com',
     siteName: 'Adrar Advertising LLC',
-    images: [
-      {
-        url: '/dubai-skyline.jpg',
-        width: 1200,
-        height: 630,
-        alt: 'Adrar Advertising LLC - Signage and Branding in Dubai',
-      },
-    ],
+    images: [{ url: '/dubai-skyline.jpg', width: 1200, height: 630, alt: 'Adrar Advertising LLC — Signage and Branding in Dubai' }],
     locale: 'en_AE',
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
     title: 'Adrar Advertising LLC — Signage & Branding Dubai',
-    description: "Dubai's leading advertising, signage and printing company since 2000.",
+    description: "Dubai's leading advertising, signage and printing company since 2000. 100% in-house production.",
     images: ['/dubai-skyline.jpg'],
   },
-  robots: {
-    index: true,
-    follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      'max-video-preview': -1,
-      'max-image-preview': 'large',
-      'max-snippet': -1,
-    },
-  },
-  verification: {
-    google: 'placeholder-google-site-verification', // Can replace when user provides
-  },
+  robots: { index: true, follow: true, googleBot: { index: true, follow: true, 'max-video-preview': -1, 'max-image-preview': 'large', 'max-snippet': -1 } },
+  verification: { google: 'placeholder-google-site-verification' },
   category: 'Advertising & Marketing Services',
+  other: {
+    'geo.region': 'AE-DU',
+    'geo.placename': 'Dubai',
+    'geo.position': '25.2861;55.3794',
+    'ICBM': '25.2861, 55.3794',
+  },
 }
 
 const localBusinessSchema = {
   '@context': 'https://schema.org',
   '@graph': [
     {
-      '@type': 'LocalBusiness',
+      '@type': ['LocalBusiness', 'Organization'],
       '@id': 'https://adraradvertising.com/#business',
-      name: 'Adrar Advertising Requisites LLC',
-      alternateName: 'Adrar Advertising LLC',
-      description: "Dubai's premier advertising, branding, signage, and large-format printing company. Operating since 2000, specializing in vehicle branding, LED signs, 3D signs, offset printing, and event collateral.",
+      name: 'Adrar Advertising LLC',
+      legalName: 'Adrar Advertising Requisites LLC',
+      alternateName: ['Adrar Advertising', 'Adrar'],
+      description: "Dubai's leading full-service advertising, branding, signage and large-format printing company. Operating since 2000 with 100% in-house production in Al Qusais, Dubai. Specialists in LED signs, vehicle branding, mall activation, retail display and digital printing across the UAE.",
       url: 'https://adraradvertising.com',
-      logo: 'https://adraradvertising.com/adrar-logo-new.png',
+      logo: {
+        '@type': 'ImageObject',
+        url: 'https://adraradvertising.com/adrar-logo-new.png',
+        width: 400,
+        height: 100,
+      },
       image: 'https://adraradvertising.com/dubai-skyline.jpg',
       priceRange: '$$',
+      currenciesAccepted: 'AED',
+      paymentAccepted: 'Cash, Credit Card, Bank Transfer',
       address: {
         '@type': 'PostalAddress',
         streetAddress: 'Industrial Area 4, Al Qusais',
@@ -117,42 +123,79 @@ const localBusinessSchema = {
       geo: {
         '@type': 'GeoCoordinates',
         latitude: '25.2861',
-        longitude: '55.3794'
+        longitude: '55.3794',
       },
+      hasMap: 'https://maps.google.com/?q=Al+Qusais+Dubai+UAE',
       telephone: '+97142587553',
       email: 'sales@flashinkjet.com',
       foundingDate: '2000',
-      foundingLocation: {
-        '@type': 'Place',
-        name: 'Dubai, UAE'
-      },
+      numberOfEmployees: { '@type': 'QuantitativeValue', minValue: 20, maxValue: 100 },
+      foundingLocation: { '@type': 'Place', name: 'Dubai, UAE' },
+      slogan: 'Making your brand impossible to miss since 2000',
+      knowsAbout: [
+        'LED Signage', 'Vehicle Branding', 'Large Format Printing',
+        'Mall Activation', 'Retail Display', 'Outdoor Advertising',
+        'In-Store Branding', 'Promotional Items', 'Hoarding', '3D Signs'
+      ],
       areaServed: [
         { '@type': 'City', name: 'Dubai' },
         { '@type': 'City', name: 'Abu Dhabi' },
         { '@type': 'City', name: 'Sharjah' },
-        { '@type': 'Country', name: 'United Arab Emirates' }
+        { '@type': 'City', name: 'Ajman' },
+        { '@type': 'Country', name: 'United Arab Emirates' },
       ],
       hasOfferCatalog: {
         '@type': 'OfferCatalog',
-        name: 'Advertising & Printing Services',
+        name: 'Advertising & Printing Services Dubai',
         itemListElement: [
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Signage & LED' } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Vehicle Branding & Wrapping' } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Large Format Printing' } },
-          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Retail & Event Activation' } }
-        ]
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'LED Signage & 3D Signs Dubai', description: 'Custom LED signs, 3D acrylic signs, aluminum and steel signs for indoor and outdoor use in Dubai.' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Vehicle Branding Dubai', description: 'RTA-approved full vehicle wrapping and fleet branding across Dubai and UAE.' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Large Format Digital Printing Dubai', description: 'High-quality banners, vinyl graphics, wall stickers, and large format printing in Dubai.' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Mall Activation & In-Store Branding Dubai', description: 'End-to-end mall advertising, in-store category branding and retail concept design in Dubai.' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Retail Display Manufacturing Dubai', description: 'Custom FSUs, podiums, gondola ends, roll-ups, pop-ups and display stands manufactured in Dubai.' } },
+          { '@type': 'Offer', itemOffered: { '@type': 'Service', name: 'Promotional Items & Packaging Dubai', description: 'Branded promotional gifts, packaging materials, tent cards and print material in Dubai.' } },
+        ],
       },
       openingHoursSpecification: [
         {
           '@type': 'OpeningHoursSpecification',
-          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
           opens: '09:00',
-          closes: '18:00'
-        }
+          closes: '18:00',
+        },
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Friday'],
+          opens: '09:00',
+          closes: '13:00',
+        },
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Saturday'],
+          opens: '09:00',
+          closes: '17:00',
+        },
       ],
       sameAs: [
-        'https://wa.me/971552217026'
-      ]
+        'https://wa.me/971552217026',
+      ],
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+97142587553',
+          contactType: 'sales',
+          areaServed: 'AE',
+          availableLanguage: ['English', 'Arabic'],
+        },
+        {
+          '@type': 'ContactPoint',
+          telephone: '+971552217026',
+          contactType: 'customer support',
+          contactOption: 'TollFree',
+          areaServed: 'AE',
+          availableLanguage: ['English', 'Arabic'],
+        },
+      ],
     },
     {
       '@type': 'FAQPage',
@@ -162,20 +205,66 @@ const localBusinessSchema = {
           name: 'Who is the best advertising and signage company in Dubai?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Adrar Advertising LLC has been widely recognized as one of the best and most reliable advertising, branding, and signage companies in Dubai since its establishment in 2000. They handle entirely in-house production in Al Qusais.'
-          }
+            text: 'Adrar Advertising LLC is one of Dubai\'s most established full-service advertising companies, operating since 2000 from Al Qusais. They offer 30+ services including LED signs, vehicle branding, large format printing, mall activation, and retail display manufacturing — all produced 100% in-house.',
+          },
         },
         {
           '@type': 'Question',
-          name: 'Does Adrar Advertising offer vehicle vehicle wrapping and branding in Dubai?',
+          name: 'Does Adrar Advertising offer vehicle wrapping and branding in Dubai?',
           acceptedAnswer: {
             '@type': 'Answer',
-            text: 'Yes, Adrar Advertising LLC specializes in RTA-approved vehicle wrapping and full fleet branding in Dubai and across the UAE.'
-          }
-        }
-      ]
-    }
-  ]
+            text: 'Yes. Adrar Advertising LLC specializes in RTA-approved vehicle wrapping and full fleet branding across Dubai and the UAE. They handle everything from design to installation in-house.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'What signage services does Adrar Advertising provide in Dubai?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Adrar provides LED signs, 3D acrylic signs, steel and aluminum signs, indoor signs, outdoor signs, hoarding, and cladding works. All signage is fabricated in their Al Qusais production facility.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'How long has Adrar Advertising been operating in Dubai?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Adrar Advertising LLC has been operating in Dubai since 2000 — over 25 years of experience serving retail, hospitality, government, and real estate clients across the UAE.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Does Adrar Advertising handle large format printing in Dubai?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes. Adrar offers large format digital printing including banners, vinyl graphics, wall stickers, posters, and offset printing. All printing is done in-house at their Dubai facility.',
+          },
+        },
+        {
+          '@type': 'Question',
+          name: 'Can Adrar Advertising handle mall activation and in-store branding in Dubai?',
+          acceptedAnswer: {
+            '@type': 'Answer',
+            text: 'Yes. Adrar Advertising specializes in full mall branding, advertising installations, in-store category branding, and retail concept design for shopping malls and retail chains across Dubai and the UAE.',
+          },
+        },
+      ],
+    },
+    {
+      '@type': 'WebSite',
+      '@id': 'https://adraradvertising.com/#website',
+      url: 'https://adraradvertising.com',
+      name: 'Adrar Advertising LLC',
+      description: 'Dubai\'s leading advertising, branding, signage and printing company since 2000',
+      publisher: { '@id': 'https://adraradvertising.com/#business' },
+      inLanguage: 'en-AE',
+      potentialAction: {
+        '@type': 'SearchAction',
+        target: { '@type': 'EntryPoint', urlTemplate: 'https://adraradvertising.com/?s={search_term_string}' },
+        'query-input': 'required name=search_term_string',
+      },
+    },
+  ],
 }
 
 export default async function RootLayout({

@@ -132,7 +132,7 @@ export default function PortfolioTeaser({ projects }: Props) {
           {/* Dots */}
           <div className="flex items-center gap-2 mt-5">
             {projects.map((_, i) => (
-              <button key={i} onClick={() => { const d = i - activeIndex; setRotation(r => r - d * ANGLE_STEP); setActiveIndex(i) }} aria-label={`Go to project ${i + 1}`}>
+              <button key={i} onClick={() => { const d = i - activeIndex; setRotation(r => r - d * ANGLE_STEP); setActiveIndex(i) }} aria-label={`Go to project ${i + 1}`} className="p-2 flex items-center justify-center">
                 <span className={`block rounded-full transition-all duration-300 ${i === activeIndex ? 'w-6 h-[3px] bg-bor-primary' : 'w-[3px] h-[3px] bg-white/25'}`} />
               </button>
             ))}
@@ -264,6 +264,7 @@ export default function PortfolioTeaser({ projects }: Props) {
                   setActiveIndex(i)
                 }}
                 aria-label={`Go to project ${i + 1}`}
+                className="p-2 flex items-center justify-center"
               >
                 <span
                   className={`block rounded-full transition-all duration-300 ${

@@ -37,6 +37,10 @@ export default function AdrarChatbot() {
     setSessionId(getOrCreateSession())
   }, [])
 
+  const focusInput = useCallback(() => {
+    setTimeout(() => inputRef.current?.focus(), 50)
+  }, [])
+
   const scrollToBottom = useCallback(() => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [])
@@ -46,7 +50,7 @@ export default function AdrarChatbot() {
   }, [messages, isTyping, scrollToBottom])
 
   useEffect(() => {
-    if (isOpen && inputRef.current) {
+    if (isOpen) {
       setTimeout(() => inputRef.current?.focus(), 350)
     }
   }, [isOpen])
@@ -63,7 +67,6 @@ export default function AdrarChatbot() {
     [sessionId]
   )
 
-  // Send greeting on first open
   useEffect(() => {
     if (!isOpen || !sessionId || greetingSent.current) return
     greetingSent.current = true
@@ -83,10 +86,11 @@ export default function AdrarChatbot() {
         setMessages([{ role: 'system', content: 'Could not connect. Please try again.' }])
       }
       setIsGreeting(false)
+      focusInput()
     }
 
     runGreeting()
-  }, [isOpen, sessionId, sendToApi])
+  }, [isOpen, sessionId, sendToApi, focusInput])
 
   const handleOpen = () => {
     setIsOpen(true)
@@ -107,10 +111,12 @@ export default function AdrarChatbot() {
     setHistory(newHistory)
     setInput('')
     setIsTyping(true)
+    focusInput()
 
     try {
       const data = await sendToApi(text, newHistory)
       setIsTyping(false)
+      focusInput()
 
       if (data?.reply) {
         const botMsg: Message = { role: 'bot', content: data.reply }
@@ -122,6 +128,7 @@ export default function AdrarChatbot() {
       }
     } catch {
       setIsTyping(false)
+      focusInput()
       setMessages((prev) => [...prev, { role: 'system', content: 'Connection error. Please try again.' }])
     }
   }
@@ -140,35 +147,30 @@ export default function AdrarChatbot() {
         {isOpen && (
           <motion.div
             key="chat-panel"
-            initial={{ opacity: 0, y: 24, scale: 0.96 }}
+            initial={{ opacity: 0, y: 20, scale: 0.96 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 16, scale: 0.97 }}
-            transition={{ duration: 0.3, ease: [0.25, 1, 0.5, 1] }}
-            className="fixed bottom-28 left-4 md:bottom-32 md:left-10 z-50 w-[calc(100vw-2rem)] max-w-[380px] rounded-2xl overflow-hidden shadow-2xl"
-            style={{ boxShadow: '0 32px 80px rgba(0,0,0,0.45)' }}
+            exit={{ opacity: 0, y: 12, scale: 0.97 }}
+            transition={{ duration: 0.28, ease: [0.25, 1, 0.5, 1] }}
+            className="fixed bottom-28 left-4 md:bottom-32 md:left-10 z-50 w-[calc(100vw-2rem)] max-w-[360px] rounded-2xl overflow-hidden"
+            style={{ boxShadow: '0 24px 64px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06)' }}
           >
             {/* Header */}
-            <div
-              className="flex items-center gap-3 px-5 py-4"
-              style={{ background: 'linear-gradient(135deg, #E8500A 0%, #c43d06 100%)' }}
-            >
-              {/* Avatar */}
-              <div className="relative flex-shrink-0">
-                <div className="w-10 h-10 rounded-full bg-white/20 flex items-center justify-center text-white text-lg font-bold">
-                  J
-                </div>
-                <span className="absolute bottom-0 right-0 w-3 h-3 bg-green-400 border-2 border-white rounded-full" />
+            <div className="flex items-center gap-3 px-4 py-3.5 bg-white border-b border-[#F0F0F0]">
+              <div className="w-8 h-8 rounded-full bg-[#E8500A] flex items-center justify-center shrink-0">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none">
+                  <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="white" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                </svg>
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-white font-semibold text-sm leading-tight truncate">John</p>
-                <p className="text-white/75 text-xs leading-tight">Adrar AI Assistant · Online</p>
+                <p className="text-[#1A1A1A] font-semibold text-[13px] leading-tight">Adrar AI</p>
+                <p className="text-[#6B6B6B] text-[11px] leading-tight">Ask us anything</p>
               </div>
               <button
                 onClick={handleClose}
                 aria-label="Close chat"
-                className="w-8 h-8 flex items-center justify-center rounded-full text-white/80 hover:text-white hover:bg-white/15 transition-colors"
+                className="w-7 h-7 flex items-center justify-center rounded-full text-[#6B6B6B] hover:text-[#1A1A1A] hover:bg-[#F5F5F5] transition-colors"
               >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <svg width="12" height="12" viewBox="0 0 16 16" fill="none">
                   <path d="M4 4l8 8M12 4l-8 8" stroke="currentColor" strokeWidth="1.8" strokeLinecap="round" />
                 </svg>
               </button>
@@ -177,9 +179,14 @@ export default function AdrarChatbot() {
             {/* Messages */}
             <div
               className="flex flex-col gap-3 px-4 py-4 overflow-y-auto"
-              style={{ height: 340, background: '#FAFAFA' }}
+              style={{ height: 320, background: '#FAFAFA' }}
               data-lenis-prevent
             >
+              {messages.length === 0 && !isTyping && (
+                <div className="flex-1 flex items-center justify-center">
+                  <p className="text-[13px] text-[#aaa] text-center">How can we help you today?</p>
+                </div>
+              )}
               {messages.map((msg, i) => (
                 <div
                   key={i}
@@ -191,10 +198,10 @@ export default function AdrarChatbot() {
                     </span>
                   ) : (
                     <div
-                      className={`max-w-[82%] px-4 py-2.5 rounded-2xl text-sm leading-relaxed ${
+                      className={`max-w-[82%] px-3.5 py-2.5 rounded-2xl text-[13px] leading-relaxed ${
                         msg.role === 'user'
                           ? 'bg-[#E8500A] text-white rounded-br-sm'
-                          : 'bg-white text-[#111] rounded-bl-sm shadow-sm border border-[#eee]'
+                          : 'bg-white text-[#111] rounded-bl-sm shadow-sm border border-[#EBEBEB]'
                       }`}
                     >
                       {msg.content}
@@ -203,14 +210,13 @@ export default function AdrarChatbot() {
                 </div>
               ))}
 
-              {/* Typing indicator */}
               {isTyping && (
                 <div className="flex justify-start">
-                  <div className="bg-white border border-[#eee] rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex items-center gap-1">
+                  <div className="bg-white border border-[#EBEBEB] rounded-2xl rounded-bl-sm px-4 py-3 shadow-sm flex items-center gap-1">
                     {[0, 1, 2].map((i) => (
                       <span
                         key={i}
-                        className="w-2 h-2 rounded-full bg-[#bbb] inline-block"
+                        className="w-1.5 h-1.5 rounded-full bg-[#ccc] inline-block"
                         style={{
                           animation: 'chatDot 1.2s ease-in-out infinite',
                           animationDelay: `${i * 0.2}s`,
@@ -224,10 +230,7 @@ export default function AdrarChatbot() {
             </div>
 
             {/* Input */}
-            <div
-              className="flex items-center gap-2 px-3 py-3 border-t border-[#E8E8E8]"
-              style={{ background: '#fff' }}
-            >
+            <div className="flex items-center gap-2 px-3 py-3 bg-white border-t border-[#F0F0F0]">
               <input
                 ref={inputRef}
                 type="text"
@@ -237,25 +240,20 @@ export default function AdrarChatbot() {
                 placeholder="Type a message…"
                 disabled={isTyping || isGreeting}
                 maxLength={1000}
-                className="flex-1 text-sm text-[#111] bg-[#F5F5F5] rounded-full px-4 py-2.5 outline-none placeholder:text-[#aaa] disabled:opacity-60 transition-colors focus:bg-[#EEEEE] focus:ring-2 focus:ring-[#E8500A]/30"
-                style={{ border: '1px solid #E8E8E8' }}
+                autoComplete="off"
+                className="flex-1 text-[13px] text-[#111] bg-[#F5F5F5] rounded-full px-4 py-2.5 outline-none placeholder:text-[#bbb] disabled:opacity-50 transition-all focus:ring-1 focus:ring-[#E8500A]/40 focus:bg-white"
+                style={{ border: '1px solid #EBEBEB' }}
               />
               <button
                 onClick={handleSend}
                 disabled={!input.trim() || isTyping || isGreeting}
                 aria-label="Send message"
-                className="w-10 h-10 flex-shrink-0 flex items-center justify-center rounded-full transition-all duration-200 disabled:opacity-40 disabled:cursor-not-allowed hover:scale-105 active:scale-95"
-                style={{ background: '#E8500A' }}
+                className="w-9 h-9 flex-shrink-0 flex items-center justify-center rounded-full bg-[#E8500A] transition-all duration-200 disabled:opacity-30 disabled:cursor-not-allowed hover:bg-[#C94008] active:scale-95"
               >
-                <svg width="16" height="16" viewBox="0 0 16 16" fill="none">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none">
                   <path d="M2 8h12M9 3l5 5-5 5" stroke="white" strokeWidth="1.8" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </button>
-            </div>
-
-            {/* Footer brand */}
-            <div className="bg-white px-4 pb-3 text-center">
-              <span className="text-[10px] text-[#bbb]">Powered by Adrar AI</span>
             </div>
           </motion.div>
         )}
@@ -268,43 +266,40 @@ export default function AdrarChatbot() {
         initial={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ delay: 2.5, duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-        whileHover={{ scale: 1.08 }}
-        whileTap={{ scale: 0.93 }}
-        className="fixed bottom-24 left-6 md:bottom-28 md:left-10 z-50 w-14 h-14 rounded-full items-center justify-center shadow-xl chat-glow"
+        whileHover={{ scale: 1.06 }}
+        whileTap={{ scale: 0.94 }}
+        className="fixed bottom-24 left-6 md:bottom-28 md:left-10 z-50 w-12 h-12 rounded-full items-center justify-center shadow-lg chat-glow"
         style={{
-          background: 'linear-gradient(135deg, #E8500A 0%, #c43d06 100%)',
+          background: '#E8500A',
           display: isOpen ? 'none' : 'flex',
         }}
       >
-        {/* Chat icon */}
-        <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
           <path
-            d="M20 2H4C2.9 2 2 2.9 2 4v18l4-4h14c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2z"
-            fill="white"
+            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
+            stroke="white"
+            strokeWidth="1.8"
+            strokeLinecap="round"
+            strokeLinejoin="round"
           />
-          <circle cx="8" cy="11" r="1.2" fill="#c43d06" />
-          <circle cx="12" cy="11" r="1.2" fill="#c43d06" />
-          <circle cx="16" cy="11" r="1.2" fill="#c43d06" />
         </svg>
 
-        {/* Unread badge */}
         <AnimatePresence>
           {hasUnread && (
             <motion.span
               initial={{ scale: 0 }}
               animate={{ scale: 1 }}
               exit={{ scale: 0 }}
-              className="absolute -top-1 -right-1 w-4 h-4 rounded-full bg-green-500 border-2 border-white"
+              className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-green-500 border-2 border-white"
             />
           )}
         </AnimatePresence>
       </motion.button>
 
-      {/* Keyframes */}
       <style>{`
         @keyframes chatDot {
           0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
-          40% { transform: translateY(-5px); opacity: 1; }
+          40% { transform: translateY(-4px); opacity: 1; }
         }
         @keyframes chatGlow {
           0%, 100% { box-shadow: 0 0 0 0 rgba(232,80,10,0), 0 8px 24px rgba(232,80,10,0.4); }

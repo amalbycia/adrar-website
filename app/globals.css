@@ -206,3 +206,42 @@ html.lenis {
 .font-serif {
   font-family: var(--font-serif);
 }
+
+/* ─── Mobile optimizations ─────────────────────────────── */
+
+/* Improve tap highlight */
+* {
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* Smooth scrolling on iOS */
+html {
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Prevent text size adjustment on orientation change */
+body {
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+
+/* Min touch target size for interactive elements */
+button, a, [role="button"] {
+  min-height: 44px;
+  min-width: 44px;
+}
+
+/* Exception for inline links and nav items */
+nav a, p a, .inline-link {
+  min-height: unset;
+  min-width: unset;
+}
+
+/* Hide scrollbar on marquee containers */
+.scrollbar-hide {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+.scrollbar-hide::-webkit-scrollbar {
+  display: none;
+}

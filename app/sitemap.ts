@@ -1,38 +1,39 @@
-import { MetadataRoute } from 'next'
+import type { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
-  const base = 'https://adraradvertising.com'
+  const baseUrl = 'https://adraradvertising.com'
+  const lastModified = new Date('2026-01-01')
 
   return [
     {
-      url: base,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
-      priority: 1,
+      url: baseUrl,
+      lastModified,
+      changeFrequency: 'weekly',
+      priority: 1.0,
     },
     {
-      url: `${base}/services`,
-      lastModified: new Date(),
+      url: `${baseUrl}/services`,
+      lastModified,
       changeFrequency: 'monthly',
       priority: 0.9,
     },
     {
-      url: `${base}/our-work`,
-      lastModified: new Date(),
+      url: `${baseUrl}/our-work`,
+      lastModified,
       changeFrequency: 'weekly',
       priority: 0.8,
     },
     {
-      url: `${base}/about`,
-      lastModified: new Date(),
-      changeFrequency: 'monthly',
+      url: `${baseUrl}/about`,
+      lastModified,
+      changeFrequency: 'yearly',
       priority: 0.7,
     },
     {
-      url: `${base}/contact`,
-      lastModified: new Date(),
+      url: `${baseUrl}/contact`,
+      lastModified,
       changeFrequency: 'yearly',
-      priority: 0.9,
+      priority: 0.8,
     },
   ]
 }

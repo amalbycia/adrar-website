@@ -44,7 +44,7 @@ export default function FloatingCTA() {
           animate={{ opacity: 1, y: 0, scale: 1 }}
           exit={{ opacity: 0, y: 20, scale: 0.95 }}
           transition={{ duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-          className="fixed z-50 bottom-4 left-1/2 -translate-x-1/2 md:bottom-8 md:right-10 md:left-auto md:translate-x-0"
+          className="fixed z-50 bottom-4 left-1/2 -translate-x-1/2 md:bottom-6 md:right-32 md:left-auto md:translate-x-0"
         >
           <Link
             href="/contact"
@@ -52,11 +52,9 @@ export default function FloatingCTA() {
             style={{ boxShadow: '0 20px 40px rgba(5,26,23,0.3)' }}
           >
             Get a Quote
-            <span className="w-8 h-8 rounded-full bg-bor-foreground-inverted text-white flex items-center justify-center transition-transform duration-300 group-hover:rotate-45">
-              <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                <path d="M2 12L12 2M12 2H4M12 2v8" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
-              </svg>
-            </span>
+            <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="transition-transform duration-300 group-hover:rotate-45 shrink-0">
+              <path d="M2 12L12 2M12 2H4M12 2v8" stroke="white" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
           </Link>
         </motion.div>
       )}

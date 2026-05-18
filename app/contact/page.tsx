@@ -3,15 +3,14 @@ import SectionHeading from '@/components/shared/SectionHeading'
 import Button from '@/components/shared/Button'
 
 export const metadata: Metadata = {
-  title: 'Contact � Adrar Advertising LLC Dubai',
-  description:
-    'Get in touch with Adrar Advertising LLC. Call, WhatsApp or email us for a quote on signage, branding, printing and retail display in Dubai.',
+  title: 'Contact Adrar Advertising LLC Dubai — Get a Quote',
+  description: 'Contact Adrar Advertising LLC for signage, branding, vehicle wrapping, large format printing and mall activation in Dubai. Call +97142587553 or WhatsApp +971552217026.',
 }
 
 export default function ContactPage() {
   return (
     <div className="pt-24 md:pt-32 pb-24 md:pb-32">
-      <div className="max-w-[1600px] mx-auto px-6">
+      <div className="max-w-[1280px] mx-auto px-6">
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 py-16 md:py-20">
           {/* Left � heading + contact details */}
           <div>
@@ -93,7 +92,7 @@ export default function ContactPage() {
                     type="text"
                     name="name"
                     required
-                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E8500A] transition-colors"
+                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3.5 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E8500A] transition-colors"
                     placeholder="Your name"
                   />
                 </div>
@@ -105,7 +104,7 @@ export default function ContactPage() {
                   <input
                     type="text"
                     name="company"
-                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E8500A] transition-colors"
+                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3.5 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E8500A] transition-colors"
                     placeholder="Company name"
                   />
                 </div>
@@ -118,7 +117,7 @@ export default function ContactPage() {
                     type="tel"
                     name="phone"
                     required
-                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E8500A] transition-colors"
+                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3.5 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E8500A] transition-colors"
                     placeholder="+971 50 000 0000"
                   />
                 </div>
@@ -129,7 +128,7 @@ export default function ContactPage() {
                   </label>
                   <select
                     name="service"
-                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3 font-body text-sm text-white focus:outline-none focus:border-[#E8500A] transition-colors"
+                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3.5 font-body text-sm text-white focus:outline-none focus:border-[#E8500A] transition-colors"
                   >
                     <option value="">Select a service</option>
                     <option>Signage &amp; LED</option>
@@ -150,7 +149,7 @@ export default function ContactPage() {
                     name="message"
                     required
                     rows={4}
-                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E8500A] transition-colors resize-none"
+                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3.5 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E8500A] transition-colors resize-none"
                     placeholder="Brief description, quantity, timeline, location�"
                   />
                 </div>
@@ -174,22 +173,28 @@ export default function ContactPage() {
             __html: JSON.stringify({
               '@context': 'https://schema.org',
               '@type': 'LocalBusiness',
-              name: 'Adrar Advertising Requisites LLC',
-              alternateName: 'Adrar Advertising LLC',
-              description:
-                "Dubai's leading advertising, branding, signage and large-format printing company since 2000.",
+              name: 'Adrar Advertising LLC',
+              legalName: 'Adrar Advertising Requisites LLC',
+              description: "Dubai's leading advertising, branding, signage and large-format printing company since 2000. 100% in-house production in Al Qusais, Dubai.",
               address: {
                 '@type': 'PostalAddress',
-                streetAddress: 'Al Qusais',
+                streetAddress: 'Industrial Area 4, Al Qusais',
                 addressLocality: 'Dubai',
+                addressRegion: 'Dubai Emirate',
                 addressCountry: 'AE',
                 postalCode: '234176',
               },
               telephone: '+97142587553',
               email: 'sales@flashinkjet.com',
               foundingDate: '2000',
-              areaServed: 'Dubai, UAE',
-              url: 'https://adrar.ae',
+              areaServed: ['Dubai', 'Abu Dhabi', 'Sharjah', 'UAE'],
+              url: 'https://adraradvertising.com',
+              contactPoint: {
+                '@type': 'ContactPoint',
+                telephone: '+971552217026',
+                contactType: 'sales',
+                availableLanguage: ['English', 'Arabic'],
+              },
             }),
           }}
         />

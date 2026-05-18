@@ -101,7 +101,9 @@ export default function LogoStrip() {
 
       <div className="flex flex-col gap-8">
         <MarqueeRow items={CLIENT_LOGOS} direction="forward" />
-        <MarqueeRow items={row2Logos} direction="reverse" />
+        <div className="hidden md:block">
+          <MarqueeRow items={row2Logos} direction="reverse" />
+        </div>
       </div>
     </section>
   )

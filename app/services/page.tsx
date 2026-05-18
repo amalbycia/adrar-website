@@ -5,16 +5,15 @@ import { serviceCategories } from '@/data/services'
 import Button from '@/components/shared/Button'
 
 export const metadata: Metadata = {
-  title: 'Services � Adrar Advertising LLC Dubai',
-  description:
-    'Signage & LED, large format printing, branding & wrapping, retail display, mall activation and promotional items � all in-house in Dubai.',
+  title: 'Advertising Services Dubai — Signage, Branding, Printing | Adrar',
+  description: 'Adrar Advertising LLC offers 30+ services: LED signs, vehicle branding, large format printing, retail display, mall activation and promotional items. 100% in-house in Al Qusais, Dubai.',
 }
 
 export default function ServicesPage() {
   return (
     <div className="pt-24 md:pt-32">
       {/* Header */}
-      <div className="max-w-[1600px] mx-auto px-6 py-16 md:py-20">
+      <div className="max-w-[1280px] mx-auto px-6 py-16 md:py-20">
         <SectionHeading
           eyebrow="Our Services"
           title="30+ services. One facility. Zero outsourcing."
@@ -23,7 +22,7 @@ export default function ServicesPage() {
       </div>
 
       {/* Service categories */}
-      <div className="max-w-[1600px] mx-auto px-6 pb-24 md:pb-32">
+      <div className="max-w-[1280px] mx-auto px-6 pb-24 md:pb-32">
         {serviceCategories.map((category, i) => (
           <div
             key={category.id}
@@ -33,7 +32,7 @@ export default function ServicesPage() {
             }`}
           >
             {/* Text */}
-            <div className={i % 2 === 1 ? 'lg:order-2' : ''}>
+            <div className={i % 2 === 1 ? 'lg:order-2' : 'lg:order-1'}>
               <span className="font-heading font-black text-6xl text-white/10 block mb-3">
                 {category.number}
               </span>
@@ -60,7 +59,7 @@ export default function ServicesPage() {
             </div>
 
             {/* Project image */}
-            <div className={`aspect-[4/3] rounded-lg overflow-hidden relative ${i % 2 === 1 ? 'lg:order-1' : ''}`}>
+            <div className={`aspect-[4/3] rounded-lg overflow-hidden relative order-last ${i % 2 === 1 ? 'lg:order-1' : 'lg:order-none'}`}>
               <Image
                 src={`/projects/${i + 2}.jpg`}
                 alt={`${category.title} project showcase`}
@@ -72,6 +71,24 @@ export default function ServicesPage() {
           </div>
         ))}
       </div>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify({
+            '@context': 'https://schema.org',
+            '@type': 'ItemList',
+            name: 'Advertising Services by Adrar Advertising LLC Dubai',
+            itemListElement: [
+              { '@type': 'ListItem', position: 1, name: 'Signage & LED', url: 'https://adraradvertising.com/services#signage-led', description: 'LED signs, 3D signs, acrylic, steel and aluminum signs, indoor & outdoor signage in Dubai.' },
+              { '@type': 'ListItem', position: 2, name: 'Large Format Printing', url: 'https://adraradvertising.com/services#large-format', description: 'Digital printing, vinyl graphics, banners, posters and wall stickers in Dubai.' },
+              { '@type': 'ListItem', position: 3, name: 'Branding & Wrapping', url: 'https://adraradvertising.com/services#branding', description: 'Vehicle branding, wall branding, floor branding, glass frosting and hoarding in Dubai.' },
+              { '@type': 'ListItem', position: 4, name: 'Retail Display Manufacturing', url: 'https://adraradvertising.com/services#retail', description: 'FSUs, podiums, gondola ends, display stands, roll-ups and pop-ups in Dubai.' },
+              { '@type': 'ListItem', position: 5, name: 'Mall & In-Store Activation', url: 'https://adraradvertising.com/services#mall', description: 'Mall branding, in-store category branding, retail concepts and design in Dubai.' },
+              { '@type': 'ListItem', position: 6, name: 'Promotional Items', url: 'https://adraradvertising.com/services#promo', description: 'Promotional gifts, packaging, tent cards, stickers and print material in Dubai.' },
+            ],
+          }),
+        }}
+      />
     </div>
   )
 }
