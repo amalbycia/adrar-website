@@ -4,9 +4,7 @@ import './globals.css'
 import LenisProvider from '@/components/providers/LenisProvider'
 import Navbar from '@/components/layout/Navbar'
 import Footer from '@/components/layout/Footer'
-import WhatsAppButton from '@/components/layout/WhatsAppButton'
-import FloatingCTA from '@/components/layout/FloatingCTA'
-import AdrarChatbot from '@/components/layout/AdrarChatbot'
+import FloatingUI from '@/components/layout/FloatingUI'
 import { getSiteSettings } from '@/sanity/lib/queries'
 import { urlFor } from '@/sanity/lib/image'
 
@@ -300,9 +298,7 @@ export default async function RootLayout({
           <Navbar logoUrl={logoUrl} logoAlt={logoAlt} />
           <main>{children}</main>
           <Footer logoUrl={logoUrl} logoAlt={logoAlt} footerBgUrl={footerBgUrl} />
-          <WhatsAppButton />
-          <FloatingCTA />
-          <AdrarChatbot />
+          <FloatingUI />
         </LenisProvider>
       </body>
     </html>

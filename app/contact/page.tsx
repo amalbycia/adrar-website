@@ -1,172 +1,96 @@
 import type { Metadata } from 'next'
-import SectionHeading from '@/components/shared/SectionHeading'
-import Button from '@/components/shared/Button'
 
 export const metadata: Metadata = {
-  title: 'Contact Adrar Advertising LLC Dubai — Get a Quote',
-  description: 'Contact Adrar Advertising LLC for signage, branding, vehicle wrapping, large format printing and mall activation in Dubai. Call +97142587553 or WhatsApp +971552217026.',
+  title: 'Contact Adrar Advertising LLC Dubai',
+  description: 'Reach Adrar Advertising LLC by phone, WhatsApp or email. Based in Al Qusais, Dubai. Call +97142587553 or WhatsApp +971552217026.',
 }
 
 export default function ContactPage() {
   return (
     <div className="pt-24 md:pt-32 pb-24 md:pb-32">
       <div className="max-w-[1280px] mx-auto px-6">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 py-16 md:py-20">
-          {/* Left � heading + contact details */}
-          <div>
-            <SectionHeading
-              eyebrow="Get in Touch"
-              title="Let's talk about your project."
-              description="Tell us what you need and we'll get back to you within one business day with a clear quote."
-            />
+        <div className="py-16 md:py-20 max-w-2xl">
 
-            <div className="mt-12 flex flex-col gap-8">
-              {/* Phone */}
-              <div>
-                <p className="text-[11px] font-body font-medium uppercase tracking-widest text-white/70 mb-2">Phone</p>
-                <a
-                  href="tel:+97142587553"
-                  className="font-heading font-bold text-2xl text-white hover:text-[#E8500A] transition-colors"
-                >
-                  04 2587553
-                </a>
-              </div>
+          <p className="text-[11px] font-body font-medium uppercase tracking-widest text-white/50 mb-6">
+            Contact
+          </p>
+          <h1 className="font-heading font-bold text-white leading-tight mb-12" style={{ fontSize: 'clamp(36px, 5vw, 64px)' }}>
+            Let&apos;s talk about your project.
+          </h1>
 
-              {/* WhatsApp */}
-              <div>
-                <p className="text-[11px] font-body font-medium uppercase tracking-widest text-white/70 mb-2">WhatsApp</p>
-                <a
-                  href="https://wa.me/971552217026"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="font-heading font-bold text-2xl text-white hover:text-[#E8500A] transition-colors"
-                >
-                  +971 55 221 7026
-                </a>
-              </div>
-
-              {/* Email */}
-              <div>
-                <p className="text-[11px] font-body font-medium uppercase tracking-widest text-white/70 mb-2">Email</p>
-                <a
-                  href="mailto:sales@flashinkjet.com"
-                  className="font-heading font-bold text-2xl text-white hover:text-[#E8500A] transition-colors"
-                >
-                  sales@flashinkjet.com
-                </a>
-              </div>
-
-              {/* Address */}
-              <div>
-                <p className="text-[11px] font-body font-medium uppercase tracking-widest text-white/70 mb-2">Location</p>
-                <p className="font-body text-base text-white leading-relaxed">
-                  Al Qusais, Dubai, UAE<br />
-                  P.O. Box 234176
-                </p>
-              </div>
-
-              <Button
-                href="https://wa.me/971552217026"
-                external
-                size="lg"
-                className="w-fit"
+          <div className="flex flex-col gap-10">
+            {/* Phone */}
+            <div>
+              <p className="text-[11px] font-body font-medium uppercase tracking-widest text-white/50 mb-2">Phone</p>
+              <a
+                href="tel:+97142587553"
+                className="font-heading font-bold text-white hover:text-[#E8500A] transition-colors"
+                style={{ fontSize: 'clamp(22px, 3vw, 32px)' }}
               >
-                WhatsApp Us Now
-              </Button>
+                04 2587553
+              </a>
             </div>
-          </div>
 
-          {/* Right � quote form */}
-          <div>
-            <div className="bg-white/5 border border-white/10 rounded-lg p-8 md:p-10">
-              <h2 className="font-heading font-bold text-2xl text-white mb-8">
-                Request a Quote
-              </h2>
-
-              <form className="flex flex-col gap-5">
-                <div>
-                  <label className="block text-[11px] font-body font-medium uppercase tracking-widest text-white/70 mb-2">
-                    Name *
-                  </label>
-                  <input
-                    type="text"
-                    name="name"
-                    required
-                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3.5 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E8500A] transition-colors"
-                    placeholder="Your name"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-body font-medium uppercase tracking-widest text-white/70 mb-2">
-                    Company
-                  </label>
-                  <input
-                    type="text"
-                    name="company"
-                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3.5 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E8500A] transition-colors"
-                    placeholder="Company name"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-body font-medium uppercase tracking-widest text-white/70 mb-2">
-                    Phone / WhatsApp *
-                  </label>
-                  <input
-                    type="tel"
-                    name="phone"
-                    required
-                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3.5 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E8500A] transition-colors"
-                    placeholder="+971 50 000 0000"
-                  />
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-body font-medium uppercase tracking-widest text-white/70 mb-2">
-                    Service Required
-                  </label>
-                  <select
-                    name="service"
-                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3.5 font-body text-sm text-white focus:outline-none focus:border-[#E8500A] transition-colors"
-                  >
-                    <option value="">Select a service</option>
-                    <option>Signage &amp; LED</option>
-                    <option>Large Format Printing</option>
-                    <option>Branding &amp; Wrapping</option>
-                    <option>Retail Display Manufacturing</option>
-                    <option>Mall &amp; In-Store Activation</option>
-                    <option>Promotional Items</option>
-                    <option>Multiple / Not Sure</option>
-                  </select>
-                </div>
-
-                <div>
-                  <label className="block text-[11px] font-body font-medium uppercase tracking-widest text-white/70 mb-2">
-                    Project Details *
-                  </label>
-                  <textarea
-                    name="message"
-                    required
-                    rows={4}
-                    className="w-full border border-white/10 rounded bg-transparent px-4 py-3.5 font-body text-sm text-white placeholder:text-white/30 focus:outline-none focus:border-[#E8500A] transition-colors resize-none"
-                    placeholder="Brief description, quantity, timeline, location�"
-                  />
-                </div>
-
-                <Button type="submit" size="lg" className="w-full mt-2">
-                  Send Request
-                </Button>
-
-                <p className="font-body text-xs text-white/70 text-center">
-                  We respond within 1 business day. For urgent jobs � WhatsApp us directly.
-                </p>
-              </form>
+            {/* WhatsApp */}
+            <div>
+              <p className="text-[11px] font-body font-medium uppercase tracking-widest text-white/50 mb-2">WhatsApp</p>
+              <a
+                href="https://wa.me/971552217026"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-heading font-bold text-white hover:text-[#E8500A] transition-colors"
+                style={{ fontSize: 'clamp(22px, 3vw, 32px)' }}
+              >
+                +971 55 221 7026
+              </a>
             </div>
+
+            {/* Email */}
+            <div>
+              <p className="text-[11px] font-body font-medium uppercase tracking-widest text-white/50 mb-2">Email</p>
+              <a
+                href="mailto:sales@flashinkjet.com"
+                className="font-heading font-bold text-white hover:text-[#E8500A] transition-colors"
+                style={{ fontSize: 'clamp(18px, 2.5vw, 28px)' }}
+              >
+                sales@flashinkjet.com
+              </a>
+            </div>
+
+            {/* Address */}
+            <div>
+              <p className="text-[11px] font-body font-medium uppercase tracking-widest text-white/50 mb-2">Location</p>
+              <p className="font-body text-base text-white leading-relaxed">
+                Industrial Area 4, Al Qusais<br />
+                Dubai, UAE<br />
+                P.O. Box 234176
+              </p>
+            </div>
+
+            {/* Hours */}
+            <div>
+              <p className="text-[11px] font-body font-medium uppercase tracking-widest text-white/50 mb-2">Hours</p>
+              <p className="font-body text-base text-white/70 leading-relaxed">
+                Mon – Thu: 09:00 – 18:00<br />
+                Fri: 09:00 – 13:00<br />
+                Sat: 09:00 – 17:00
+              </p>
+            </div>
+
+            <a
+              href="https://wa.me/971552217026"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-3 px-8 py-4 rounded-full bg-[#E8500A] text-white text-[14px] font-body font-bold uppercase tracking-wide hover:bg-[#C94008] transition-colors duration-200 w-fit"
+            >
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+              </svg>
+              WhatsApp Us Now
+            </a>
           </div>
         </div>
 
-        {/* LocalBusiness JSON-LD schema */}
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{

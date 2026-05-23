@@ -51,10 +51,7 @@ export default function ServicesPage() {
                 ))}
               </ul>
               <div className="mt-8 flex gap-4">
-                <Button href="/contact" size="md">Get a Quote</Button>
-                <Button href="https://wa.me/971552217026" external variant="outline" size="md">
-                  WhatsApp Us
-                </Button>
+                <Button href="https://wa.me/971552217026" external size="md">WhatsApp Us</Button>
               </div>
             </div>
 

@@ -133,12 +133,14 @@ export default function Footer({ logoUrl, logoAlt = 'Adrar Advertising LLC', foo
             </i>
           </h2>
 
-          <Link
-            href="/contact"
-            className="inline-flex items-center justify-center px-8 py-4 rounded-full bg-bor-primary text-white text-[15px] font-body font-bold uppercase tracking-wide hover:bg-[#C94208] transition-colors duration-200 shadow-lg"
+          <a
+            href="https://wa.me/971552217026"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center justify-center gap-2 px-8 py-4 rounded-full bg-bor-primary text-white text-[15px] font-body font-bold uppercase tracking-wide hover:bg-[#C94208] transition-colors duration-200 shadow-lg"
           >
-            Get a Quote
-          </Link>
+            WhatsApp Us
+          </a>
         </div>
 
         {/* Bottom fade — blends image into footer nav section */}

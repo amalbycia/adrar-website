@@ -20,14 +20,18 @@ function getOrCreateSession(): string {
   return id
 }
 
-export default function AdrarChatbot() {
-  const [isOpen, setIsOpen] = useState(false)
+interface AdrarChatbotProps {
+  isOpen: boolean
+  onClose: () => void
+  onUnread: (v: boolean) => void
+}
+
+export default function AdrarChatbot({ isOpen, onClose, onUnread }: AdrarChatbotProps) {
   const [messages, setMessages] = useState<Message[]>([])
   const [input, setInput] = useState('')
   const [isTyping, setIsTyping] = useState(false)
   const [sessionId, setSessionId] = useState('')
   const [history, setHistory] = useState<{ role: string; content: string }[]>([])
-  const [hasUnread, setHasUnread] = useState(false)
   const [isGreeting, setIsGreeting] = useState(false)
   const messagesEndRef = useRef<HTMLDivElement>(null)
   const inputRef = useRef<HTMLInputElement>(null)
@@ -92,15 +96,6 @@ export default function AdrarChatbot() {
     runGreeting()
   }, [isOpen, sessionId, sendToApi, focusInput])
 
-  const handleOpen = () => {
-    setIsOpen(true)
-    setHasUnread(false)
-  }
-
-  const handleClose = () => {
-    setIsOpen(false)
-  }
-
   const handleSend = async () => {
     const text = input.trim()
     if (!text || isTyping || isGreeting) return
@@ -122,7 +117,7 @@ export default function AdrarChatbot() {
         const botMsg: Message = { role: 'bot', content: data.reply }
         setMessages((prev) => [...prev, botMsg])
         setHistory((prev) => [...prev, { role: 'assistant', content: data.reply }])
-        if (!isOpen) setHasUnread(true)
+        if (!isOpen) onUnread(true)
       } else {
         setMessages((prev) => [...prev, { role: 'system', content: 'Something went wrong. Please try again.' }])
       }
@@ -142,7 +137,6 @@ export default function AdrarChatbot() {
 
   return (
     <>
-      {/* Chat Panel */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
@@ -151,7 +145,7 @@ export default function AdrarChatbot() {
             animate={{ opacity: 1, y: 0, scale: 1 }}
             exit={{ opacity: 0, y: 12, scale: 0.97 }}
             transition={{ duration: 0.28, ease: [0.25, 1, 0.5, 1] }}
-            className="fixed bottom-28 left-4 md:bottom-32 md:left-10 z-50 w-[calc(100vw-2rem)] max-w-[360px] rounded-2xl overflow-hidden"
+            className="fixed bottom-24 left-4 md:bottom-28 md:left-8 z-50 w-[calc(100vw-2rem)] max-w-[360px] rounded-2xl overflow-hidden"
             style={{ boxShadow: '0 24px 64px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06)' }}
           >
             {/* Header */}
@@ -166,7 +160,7 @@ export default function AdrarChatbot() {
                 <p className="text-[#6B6B6B] text-[11px] leading-tight">Ask us anything</p>
               </div>
               <button
-                onClick={handleClose}
+                onClick={onClose}
                 aria-label="Close chat"
                 className="w-7 h-7 flex items-center justify-center rounded-full text-[#6B6B6B] hover:text-[#1A1A1A] hover:bg-[#F5F5F5] transition-colors"
               >
@@ -259,54 +253,10 @@ export default function AdrarChatbot() {
         )}
       </AnimatePresence>
 
-      {/* Floating Trigger Button */}
-      <motion.button
-        onClick={handleOpen}
-        aria-label="Open Adrar chat assistant"
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 2.5, duration: 0.35, ease: [0.25, 1, 0.5, 1] }}
-        whileHover={{ scale: 1.06 }}
-        whileTap={{ scale: 0.94 }}
-        className="fixed bottom-24 left-6 md:bottom-28 md:left-10 z-50 w-12 h-12 rounded-full items-center justify-center shadow-lg chat-glow"
-        style={{
-          background: '#E8500A',
-          display: isOpen ? 'none' : 'flex',
-        }}
-      >
-        <svg width="20" height="20" viewBox="0 0 24 24" fill="none">
-          <path
-            d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"
-            stroke="white"
-            strokeWidth="1.8"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-          />
-        </svg>
-
-        <AnimatePresence>
-          {hasUnread && (
-            <motion.span
-              initial={{ scale: 0 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0 }}
-              className="absolute -top-1 -right-1 w-3.5 h-3.5 rounded-full bg-green-500 border-2 border-white"
-            />
-          )}
-        </AnimatePresence>
-      </motion.button>
-
       <style>{`
         @keyframes chatDot {
           0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
           40% { transform: translateY(-4px); opacity: 1; }
-        }
-        @keyframes chatGlow {
-          0%, 100% { box-shadow: 0 0 0 0 rgba(232,80,10,0), 0 8px 24px rgba(232,80,10,0.4); }
-          50%       { box-shadow: 0 0 0 10px rgba(232,80,10,0), 0 8px 28px rgba(232,80,10,0.65); }
-        }
-        .chat-glow {
-          animation: chatGlow 3s ease-in-out infinite;
         }
       `}</style>
     </>

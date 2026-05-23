@@ -49,7 +49,7 @@ export default function AboutPage() {
             <p className="font-body text-base text-white/70 leading-relaxed mb-8">
               When you work with Adrar, you&apos;re working with the people who actually build, print, and install your brand materials. Not a middleman.
             </p>
-            <Button href="/contact">Get in Touch</Button>
+            <Button href="https://wa.me/971552217026" external>WhatsApp Us</Button>
           </div>
 
           {/* Placeholder image */}
