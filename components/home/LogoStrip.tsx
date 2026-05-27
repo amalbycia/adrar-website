@@ -37,16 +37,27 @@ function LogoImage({ name, url }: { name: string; url: string }) {
         justifyContent: 'center',
       }}
     >
-      <div style={{ position: 'relative', width: '100%', height: '100%' }}>
+      <div style={{ position: 'relative', width: '100%', height: '100%' }} className="group">
         <Image
           src={url}
           alt={name}
           fill
           sizes={`${LOGO_W}px`}
-          className="object-contain transition-opacity duration-300"
+          className="object-contain transition-[opacity,filter] duration-300 ease-out"
           style={{ filter: 'brightness(0)', opacity: 0.72 }}
-          onMouseEnter={e => { (e.currentTarget as HTMLImageElement).style.opacity = '1' }}
-          onMouseLeave={e => { (e.currentTarget as HTMLImageElement).style.opacity = '0.72' }}
+        />
+        {/* Invisible overlay that drives the hover via group */}
+        <span
+          className="absolute inset-0 z-10 cursor-default"
+          aria-hidden
+          onMouseEnter={e => {
+            const img = e.currentTarget.previousElementSibling as HTMLImageElement | null
+            if (img) { img.style.opacity = '1'; img.style.filter = 'brightness(1)' }
+          }}
+          onMouseLeave={e => {
+            const img = e.currentTarget.previousElementSibling as HTMLImageElement | null
+            if (img) { img.style.opacity = '0.72'; img.style.filter = 'brightness(0)' }
+          }}
         />
       </div>
     </div>
@@ -87,23 +98,28 @@ function MarqueeRow({
 }
 
 export default function LogoStrip() {
-  // Row 2 is visually distinct
   const row2Logos = [...CLIENT_LOGOS].reverse()
 
   return (
     <section
       className="bg-bor-background overflow-hidden"
-      style={{ paddingTop: '72px', paddingBottom: '80px' }}
+      style={{ paddingTop: '48px', paddingBottom: '56px' }}
     >
-      <p className="text-center font-body text-[20px] font-normal text-bor-foreground mb-12 relative z-10">
+      <p className="text-center font-body text-[15px] md:text-[20px] font-normal text-bor-foreground mb-8 md:mb-12 relative z-10 px-4">
         Trusted by Dubai&apos;s leading brands &amp; retailers
       </p>
 
-      <div className="flex flex-col gap-8">
-        <MarqueeRow items={CLIENT_LOGOS} direction="forward" />
-        <div className="hidden md:block">
-          <MarqueeRow items={row2Logos} direction="reverse" />
+      {/* Mobile: scale the strip to 65% so logos fit without horizontal overflow */}
+      <div className="md:hidden" style={{ transform: 'scaleX(0.72)', transformOrigin: 'center' }}>
+        <div className="flex flex-col gap-6">
+          <MarqueeRow items={CLIENT_LOGOS} direction="forward" />
         </div>
+      </div>
+
+      {/* Desktop: full size, two rows */}
+      <div className="hidden md:flex flex-col gap-8">
+        <MarqueeRow items={CLIENT_LOGOS} direction="forward" />
+        <MarqueeRow items={row2Logos} direction="reverse" />
       </div>
     </section>
   )

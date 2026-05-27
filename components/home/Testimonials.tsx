@@ -99,7 +99,7 @@ function TestimonialCard({ initials, avatarBg, name, role, company, quote }: Car
   const hasAvatar = !['LF', 'MB'].includes(initials); // arbitrary logic for visual variety
 
   return (
-    <div className="shrink-0 w-[400px] md:w-[480px] bg-[#F6F7F3] border border-[#DEE1DC] rounded-[8px] p-8 mx-3 flex flex-col">
+    <div className="shrink-0 w-[85vw] sm:w-[400px] md:w-[480px] max-w-[480px] bg-[#F6F7F3] border border-[#DEE1DC] rounded-[8px] p-6 sm:p-8 mx-3 flex flex-col">
       {/* Header */}
       <div className="flex items-center gap-4 mb-6">
         {hasAvatar && (
@@ -113,17 +113,17 @@ function TestimonialCard({ initials, avatarBg, name, role, company, quote }: Car
           </div>
         )}
         <div className="flex flex-col justify-center">
-          <p className="font-body text-[16px] font-semibold text-[#181D1A] mb-0.5">
+          <p className="font-body text-[14px] sm:text-[16px] font-semibold text-[#181D1A] mb-0.5">
             {name}
           </p>
-          <p className="font-body text-[14px] text-[#6D726E]">
+          <p className="font-body text-[12px] sm:text-[14px] text-[#6D726E]">
             {role}, {company}
           </p>
         </div>
       </div>
 
       {/* Quote */}
-      <p className="font-body text-[17px] font-normal text-[#181D1A] leading-[1.6] flex-1">
+      <p className="font-body text-[15px] sm:text-[17px] font-normal text-[#181D1A] leading-[1.6] flex-1">
         {quote}
       </p>
 
@@ -141,7 +141,7 @@ function TestimonialCard({ initials, avatarBg, name, role, company, quote }: Car
             </svg>
           </span>
         )}
-        <p className="font-heading font-black text-[18px] text-[#181D1A] tracking-[-0.5px] uppercase">
+        <p className="font-heading font-black text-[15px] sm:text-[18px] text-[#181D1A] tracking-[-0.5px] uppercase">
           {company}
         </p>
       </div>
@@ -167,15 +167,15 @@ export default function Testimonials({ testimonials: sanityData = [] }: Testimon
   const row1 = [...source, ...source]
   const row2 = [...sourceMid, ...sourceMid]
   return (
-    <section className="bg-bor-background py-24 md:py-32 overflow-hidden">
-      <div className="max-w-[1280px] mx-auto px-6 md:px-8 mb-20 relative z-10">
-        <p className="text-center font-body text-[13px] font-semibold uppercase tracking-[0.2em] text-bor-foreground-muted mb-6">
+    <section className="bg-bor-background py-16 md:py-32 overflow-hidden">
+      <div className="max-w-[1280px] mx-auto px-6 md:px-8 mb-12 md:mb-20 relative z-10">
+        <p className="text-center font-body text-[11px] sm:text-[13px] font-semibold uppercase tracking-[0.2em] text-bor-foreground-muted mb-4 md:mb-6">
           Don&apos;t just take it from us
         </p>
 
         <h2
           className="text-center font-heading font-medium text-bor-foreground leading-[1] tracking-[0.1px] mx-auto"
-          style={{ fontSize: 'clamp(48px, 6vw, 96px)', maxWidth: '900px' }}
+          style={{ fontSize: 'clamp(32px, 8vw, 96px)', maxWidth: '900px' }}
         >
           Client wins,{' '}
           <i className="font-serif italic font-normal text-bor-foreground opacity-90">
@@ -188,7 +188,10 @@ export default function Testimonials({ testimonials: sanityData = [] }: Testimon
       <div className="relative py-4">
         {/* Marquee Row 1 */}
         <div className="flex overflow-hidden group mb-6">
-          <div className="flex animate-marquee group-hover:[animation-play-state:paused] items-stretch">
+          <div
+            className="flex animate-marquee group-hover:[animation-play-state:paused] items-start"
+            style={{ willChange: 'transform' }}
+          >
             {row1.map((t, i) => (
               <TestimonialCard key={`r1-${i}`} {...t} />
             ))}
@@ -197,7 +200,10 @@ export default function Testimonials({ testimonials: sanityData = [] }: Testimon
 
         {/* Marquee Row 2 */}
         <div className="flex overflow-hidden group">
-          <div className="flex animate-marquee-reverse group-hover:[animation-play-state:paused] items-stretch">
+          <div
+            className="flex animate-marquee-reverse group-hover:[animation-play-state:paused] items-start"
+            style={{ willChange: 'transform' }}
+          >
             {row2.map((t, i) => (
               <TestimonialCard key={`r2-${i}`} {...t} />
             ))}

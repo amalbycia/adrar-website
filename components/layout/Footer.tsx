@@ -246,8 +246,7 @@ export default function Footer({ logoUrl, logoAlt = 'Adrar Advertising LLC', foo
 
         </div>
 
-        {/* ── Bottom bar ── */}
-        <div className="pt-8 pb-12 border-t border-white/10 flex flex-col lg:flex-row items-center justify-between gap-8">
+        <div className="pt-8 pb-12 border-t border-white/10 flex flex-col lg:flex-row items-center justify-between gap-6 lg:gap-8">
 
           {/* Left — Logo + copyright */}
           <div className="flex flex-col items-center lg:items-start gap-3 flex-1">
@@ -266,26 +265,13 @@ export default function Footer({ logoUrl, logoAlt = 'Adrar Advertising LLC', foo
                 </span>
               )}
             </Link>
-            <p className="font-body text-[14px] text-[#A3A3A3]">
+            <p className="font-body text-[14px] text-[#A3A3A3] text-center lg:text-left">
               © {new Date().getFullYear()} Adrar Advertising LLC. All rights reserved.
             </p>
           </div>
 
-          {/* Middle — Legal Links */}
-          <div className="flex flex-wrap items-center justify-center gap-6 lg:gap-8 flex-[1.5]">
-            {['Privacy policy', 'Terms of use', 'Status page', 'DMCA'].map((link) => (
-              <Link
-                key={link}
-                href="/"
-                className="font-body text-[14px] text-[#B0B0B0] border-b border-[#B0B0B0]/40 hover:text-white hover:border-white transition-colors pb-0.5"
-              >
-                {link}
-              </Link>
-            ))}
-          </div>
-
-          {/* Right — Social icons */}
-          <div className="flex items-center justify-center lg:justify-end gap-3 flex-1">
+          {/* Right — Social icons (shown second on mobile, third on desktop) */}
+          <div className="flex items-center justify-center lg:justify-end gap-3 flex-1 order-2 lg:order-3">
             {[
               { icon: <IconLinkedIn />,  href: 'https://linkedin.com',          label: 'LinkedIn' },
               { icon: <IconFacebook />,  href: 'https://facebook.com',          label: 'Facebook' },
@@ -306,6 +292,19 @@ export default function Footer({ logoUrl, logoAlt = 'Adrar Advertising LLC', foo
             <div className="w-11 h-11 ml-2 rounded-[6px] bg-bor-primary flex items-center justify-center text-white shrink-0 shadow-[0_0_15px_rgba(232,80,10,0.3)]">
               <span className="font-heading font-black text-xl leading-none">A</span>
             </div>
+          </div>
+
+          {/* Middle — Legal Links (shown third on mobile, second on desktop) */}
+          <div className="flex flex-wrap items-center justify-center gap-5 lg:gap-8 flex-[1.5] order-3 lg:order-2">
+            {['Privacy policy', 'Terms of use', 'Status page', 'DMCA'].map((link) => (
+              <Link
+                key={link}
+                href="/"
+                className="font-body text-[14px] text-[#B0B0B0] border-b border-[#B0B0B0]/40 hover:text-white hover:border-white transition-colors pb-0.5"
+              >
+                {link}
+              </Link>
+            ))}
           </div>
 
         </div>

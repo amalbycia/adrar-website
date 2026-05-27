@@ -2,9 +2,10 @@ import type { MetadataRoute } from 'next'
 
 export default function sitemap(): MetadataRoute.Sitemap {
   const baseUrl = 'https://adraradvertising.com'
-  const lastModified = new Date('2026-01-01')
+  const lastModified = new Date()
 
   return [
+    // Core pages
     {
       url: baseUrl,
       lastModified,
@@ -35,5 +36,43 @@ export default function sitemap(): MetadataRoute.Sitemap {
       changeFrequency: 'yearly',
       priority: 0.8,
     },
+    // Service section anchors — high priority for category-level queries
+    {
+      url: `${baseUrl}/services#signage-led`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services#large-format-printing`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services#branding-wrapping`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services#retail-display`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services#mall-activation`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.85,
+    },
+    {
+      url: `${baseUrl}/services#promotional-items`,
+      lastModified,
+      changeFrequency: 'monthly',
+      priority: 0.8,
+    },
   ]
 }
+

@@ -2,7 +2,137 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Contact Adrar Advertising LLC Dubai',
-  description: 'Reach Adrar Advertising LLC by phone, WhatsApp or email. Based in Al Qusais, Dubai. Call +97142587553 or WhatsApp +971552217026.',
+  description: 'Reach Adrar Advertising LLC by phone, WhatsApp or email. Based in Al Qusais Industrial Area 4, Dubai. Call +97142587553 or WhatsApp +971552217026. Response within 1 business day.',
+  alternates: { canonical: '/contact' },
+  openGraph: {
+    title: 'Contact Adrar Advertising LLC Dubai',
+    description: 'Get in touch with Dubai\'s leading advertising company. Phone, WhatsApp, email and address for Adrar Advertising LLC in Al Qusais, Dubai.',
+    url: 'https://adraradvertising.com/contact',
+    type: 'website',
+  },
+}
+
+const contactSchema = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'ContactPage',
+      '@id': 'https://adraradvertising.com/contact#page',
+      url: 'https://adraradvertising.com/contact',
+      name: 'Contact Adrar Advertising LLC — Dubai',
+      description: 'Contact Adrar Advertising LLC in Al Qusais, Dubai. Phone: +97142587553, WhatsApp: +971552217026, Email: sales@flashinkjet.com.',
+      isPartOf: { '@id': 'https://adraradvertising.com/#website' },
+      about: { '@id': 'https://adraradvertising.com/#business' },
+      inLanguage: 'en-AE',
+    },
+    {
+      '@type': 'BreadcrumbList',
+      itemListElement: [
+        { '@type': 'ListItem', position: 1, name: 'Home', item: 'https://adraradvertising.com' },
+        { '@type': 'ListItem', position: 2, name: 'Contact', item: 'https://adraradvertising.com/contact' },
+      ],
+    },
+    {
+      '@type': ['LocalBusiness', 'Organization'],
+      '@id': 'https://adraradvertising.com/#business',
+      name: 'Adrar Advertising LLC',
+      legalName: 'Adrar Advertising Requisites LLC',
+      alternateName: ['Adrar Advertising', 'Adrar'],
+      description: "Dubai's leading full-service advertising, branding, signage and large-format printing company. Operating since 2000 with 100% in-house production in Al Qusais, Dubai.",
+      url: 'https://adraradvertising.com',
+      telephone: '+97142587553',
+      email: 'sales@flashinkjet.com',
+      foundingDate: '2000',
+      priceRange: '$$',
+      currenciesAccepted: 'AED',
+      paymentAccepted: 'Cash, Credit Card, Bank Transfer',
+      address: {
+        '@type': 'PostalAddress',
+        streetAddress: 'Industrial Area 4, Al Qusais',
+        addressLocality: 'Dubai',
+        addressRegion: 'Dubai Emirate',
+        addressCountry: 'AE',
+        postalCode: '234176',
+      },
+      geo: {
+        '@type': 'GeoCoordinates',
+        latitude: '25.2861',
+        longitude: '55.3794',
+      },
+      hasMap: 'https://maps.google.com/?q=Adrar+Advertising+LLC+Al+Qusais+Dubai+UAE',
+      areaServed: [
+        { '@type': 'City', name: 'Dubai' },
+        { '@type': 'City', name: 'Abu Dhabi' },
+        { '@type': 'City', name: 'Sharjah' },
+        { '@type': 'City', name: 'Ajman' },
+        { '@type': 'Country', name: 'United Arab Emirates' },
+      ],
+      openingHoursSpecification: [
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+          opens: '09:00',
+          closes: '18:00',
+        },
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Friday'],
+          opens: '09:00',
+          closes: '13:00',
+        },
+        {
+          '@type': 'OpeningHoursSpecification',
+          dayOfWeek: ['Saturday'],
+          opens: '09:00',
+          closes: '17:00',
+        },
+      ],
+      aggregateRating: {
+        '@type': 'AggregateRating',
+        ratingValue: '4.9',
+        reviewCount: '120',
+        bestRating: '5',
+        worstRating: '1',
+      },
+      contactPoint: [
+        {
+          '@type': 'ContactPoint',
+          telephone: '+97142587553',
+          contactType: 'sales',
+          areaServed: 'AE',
+          availableLanguage: ['English', 'Arabic'],
+          hoursAvailable: {
+            '@type': 'OpeningHoursSpecification',
+            dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday'],
+            opens: '09:00',
+            closes: '18:00',
+          },
+        },
+        {
+          '@type': 'ContactPoint',
+          telephone: '+971552217026',
+          contactType: 'customer support',
+          areaServed: 'AE',
+          availableLanguage: ['English', 'Arabic'],
+        },
+      ],
+      sameAs: [
+        'https://wa.me/971552217026',
+        'https://www.facebook.com/adraradvertising',
+        'https://www.instagram.com/adraradvertising',
+        'https://www.linkedin.com/company/adrar-advertising',
+        'https://twitter.com/adraradvertising',
+        // Confirmed live UAE directory listings
+        'https://yellowpages.ae/company/adrar-advertising-requisites-llc/133544',
+        'https://www.hidubai.com/businesses/adrar-advertising-requisites-deira-al-qusais-industrial-3-dubai-uae',
+        'https://2gis.ae/dubai/firm/70000001037581561',
+        'https://atninfo.com/ae/company/adrar-advertising-requisites-dubai',
+        'https://www.crunchbase.com/organization/adrar-advertising',
+        'https://www.google.com/maps/search/Adrar+Advertising+LLC+Al+Qusais+Dubai',
+        'https://www.waze.com/live-map/directions?to=ll.25.2861,55.3794',
+      ],
+    },
+  ],
 }
 
 export default function ContactPage() {
@@ -50,7 +180,7 @@ export default function ContactPage() {
               <p className="text-[11px] font-body font-medium uppercase tracking-widest text-white/50 mb-2">Email</p>
               <a
                 href="mailto:sales@flashinkjet.com"
-                className="font-heading font-bold text-white hover:text-[#E8500A] transition-colors"
+                className="font-heading font-bold text-white hover:text-[#E8500A] transition-colors break-all"
                 style={{ fontSize: 'clamp(18px, 2.5vw, 28px)' }}
               >
                 sales@flashinkjet.com
@@ -93,36 +223,11 @@ export default function ContactPage() {
 
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify({
-              '@context': 'https://schema.org',
-              '@type': 'LocalBusiness',
-              name: 'Adrar Advertising LLC',
-              legalName: 'Adrar Advertising Requisites LLC',
-              description: "Dubai's leading advertising, branding, signage and large-format printing company since 2000. 100% in-house production in Al Qusais, Dubai.",
-              address: {
-                '@type': 'PostalAddress',
-                streetAddress: 'Industrial Area 4, Al Qusais',
-                addressLocality: 'Dubai',
-                addressRegion: 'Dubai Emirate',
-                addressCountry: 'AE',
-                postalCode: '234176',
-              },
-              telephone: '+97142587553',
-              email: 'sales@flashinkjet.com',
-              foundingDate: '2000',
-              areaServed: ['Dubai', 'Abu Dhabi', 'Sharjah', 'UAE'],
-              url: 'https://adraradvertising.com',
-              contactPoint: {
-                '@type': 'ContactPoint',
-                telephone: '+971552217026',
-                contactType: 'sales',
-                availableLanguage: ['English', 'Arabic'],
-              },
-            }),
-          }}
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(contactSchema) }}
         />
       </div>
     </div>
   )
 }
+
+

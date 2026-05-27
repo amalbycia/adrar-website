@@ -54,8 +54,8 @@ function buildColumn(
   return slots
 }
 
-const COL_ANIMATION = ['animate-scroll-up', 'animate-scroll-down', 'animate-scroll-up-slow']
-const COL_DELAY = ['0s', '0s', '-12s']
+const COL_ANIMATION = ['animate-scroll-up', 'animate-scroll-down', 'animate-scroll-up-slow'] as const
+const COL_DELAY     = ['0s', '0s', '-15s'] as const
 
 export default function Hero({ heroCards }: HeroProps) {
   const col1Cards = heroCards?.col1 ?? []
@@ -81,24 +81,24 @@ export default function Hero({ heroCards }: HeroProps) {
         <div
           className="relative z-10 flex flex-col justify-center shrink-0 h-full
                      pl-6 pr-6 md:pl-10 lg:pl-16 xl:pl-20
-                     pt-16
+                     pt-24 md:pt-16
                      w-full lg:w-[58%] xl:w-[56%]"
         >
           <div className="max-w-[520px]">
 
             <motion.p
-              initial={{ opacity: 0, y: 8 }}
+              initial={{ opacity: 0, y: 10 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.45, ease }}
+              transition={{ duration: 0.5, ease }}
               className="font-body text-[11px] font-bold uppercase tracking-[0.22em] text-bor-primary mb-6"
             >
               Dubai&apos;s Leading Advertising Company Since 2000
             </motion.p>
 
             <motion.h1
-              initial={{ opacity: 0, y: 28 }}
+              initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.1, ease }}
+              transition={{ duration: 0.7, delay: 0.12, ease }}
               className="font-heading font-medium text-white leading-[0.92] tracking-[-0.01em]"
               style={{ fontSize: 'clamp(40px, 5vw, 88px)' }}
             >
@@ -110,9 +110,9 @@ export default function Hero({ heroCards }: HeroProps) {
             </motion.h1>
 
             <motion.p
-              initial={{ opacity: 0, y: 16 }}
+              initial={{ opacity: 0, y: 14 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.2, ease }}
+              transition={{ duration: 0.7, delay: 0.24, ease }}
               className="mt-6 font-body text-white/55 leading-[1.7]"
               style={{ fontSize: 'clamp(15px, 1.1vw, 17px)' }}
             >
@@ -121,9 +121,9 @@ export default function Hero({ heroCards }: HeroProps) {
             </motion.p>
 
             <motion.div
-              initial={{ opacity: 0, y: 14 }}
+              initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.75, delay: 0.3, ease }}
+              transition={{ duration: 0.7, delay: 0.36, ease }}
               className="mt-9 flex flex-col sm:flex-row gap-3"
             >
               <button
@@ -154,8 +154,8 @@ export default function Hero({ heroCards }: HeroProps) {
           {loopCols.map((col, colIndex) => (
             <div key={`col-${colIndex}`} className="flex-1 min-w-0 overflow-hidden">
               <div
-                className={`flex flex-col gap-2.5 ${COL_ANIMATION[colIndex]}`}
-                style={{ animationDelay: COL_DELAY[colIndex] }}
+                className={`flex flex-col gap-2.5 ${COL_ANIMATION[colIndex % 3]}`}
+                style={{ animationDelay: COL_DELAY[colIndex % 3] }}
               >
                 {col.map((slot, i) => {
                   const card = slot.type === 'image' ? (slot as ImageSlot).card : null

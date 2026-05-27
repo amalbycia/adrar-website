@@ -7,22 +7,22 @@ import { motion, AnimatePresence } from 'framer-motion'
 import gsap from 'gsap'
 
 const SCROLL_START = 60
-const SCROLL_END   = 140
+const SCROLL_END = 140
 
 const navLinks = [
-  { label: 'Home',     href: '/'         },
-  { label: 'Services', href: '/services'  },
-  { label: 'Our Work', href: '/our-work'  },
-  { label: 'About',    href: '/about'     },
-  { label: 'Contact',  href: '/contact'   },
+  { label: 'Home', href: '/' },
+  { label: 'Services', href: '/services' },
+  { label: 'Our Work', href: '/our-work' },
+  { label: 'About', href: '/about' },
+  { label: 'Contact', href: '/contact' },
 ]
 
 const drawerLinks = navLinks
 
 // Spring configs
-const springSnappy  = { type: 'spring', stiffness: 500, damping: 32 } as const
-const springMorph   = { type: 'spring', stiffness: 340, damping: 30 } as const
-const springElastic = { type: 'spring', stiffness: 320, damping: 22 } as const
+const springSnappy = { type: 'spring', stiffness: 500, damping: 36 } as const
+const springMorph = { type: 'spring', stiffness: 440, damping: 38 } as const
+const springElastic = { type: 'spring', stiffness: 320, damping: 30 } as const
 
 interface NavbarProps {
   logoUrl?: string | null
@@ -31,22 +31,22 @@ interface NavbarProps {
 
 export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: NavbarProps) {
   const [drawerOpen, setDrawerOpen] = useState(false)
-  const [menuOpen,   setMenuOpen]   = useState(false)
+  const [menuOpen, setMenuOpen] = useState(false)
 
   const fullBarRef = useRef<HTMLDivElement>(null)
-  const pillRef    = useRef<HTMLDivElement>(null)
+  const pillRef = useRef<HTMLDivElement>(null)
 
   useEffect(() => {
     const fullBar = fullBarRef.current
-    const pill    = pillRef.current
+    const pill = pillRef.current
     if (!fullBar || !pill) return
 
     gsap.set(pill, { opacity: 0, y: -10 })
 
     const qFullOpacity = gsap.quickTo(fullBar, 'opacity', { duration: 0.22, ease: 'power2.out' })
-    const qFullY       = gsap.quickTo(fullBar, 'y',       { duration: 0.5,  ease: 'elastic.out(1, 0.7)' })
-    const qPillOpacity = gsap.quickTo(pill,    'opacity', { duration: 0.25, ease: 'power2.out' })
-    const qPillY       = gsap.quickTo(pill,    'y',       { duration: 0.55, ease: 'elastic.out(1, 0.65)' })
+    const qFullY = gsap.quickTo(fullBar, 'y', { duration: 0.5, ease: 'elastic.out(1, 0.7)' })
+    const qPillOpacity = gsap.quickTo(pill, 'opacity', { duration: 0.25, ease: 'power2.out' })
+    const qPillY = gsap.quickTo(pill, 'y', { duration: 0.55, ease: 'elastic.out(1, 0.65)' })
 
     const onScroll = () => {
       const sy = window.scrollY
@@ -55,18 +55,18 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
         qFullOpacity(1); qFullY(0)
         qPillOpacity(0); qPillY(-10)
         fullBar.style.pointerEvents = 'auto'
-        pill.style.pointerEvents    = 'none'
+        pill.style.pointerEvents = 'none'
       } else if (sy >= SCROLL_END) {
         qFullOpacity(0); qFullY(-20)
         qPillOpacity(1); qPillY(0)
         fullBar.style.pointerEvents = 'none'
-        pill.style.pointerEvents    = 'auto'
+        pill.style.pointerEvents = 'auto'
       } else {
         const p = (sy - SCROLL_START) / (SCROLL_END - SCROLL_START)
         qFullOpacity(1 - p); qFullY(-20 * p)
-        qPillOpacity(p);     qPillY(-10 * (1 - p))
+        qPillOpacity(p); qPillY(-10 * (1 - p))
         fullBar.style.pointerEvents = p < 0.5 ? 'auto' : 'none'
-        pill.style.pointerEvents    = p >= 0.5 ? 'auto' : 'none'
+        pill.style.pointerEvents = p >= 0.5 ? 'auto' : 'none'
       }
     }
 
@@ -133,7 +133,7 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
               className="inline-flex items-center gap-2 px-6 py-2.5 rounded-full bg-bor-primary text-bor-foreground-inverted text-[14px] font-body font-bold uppercase tracking-wide hover:bg-white hover:text-bor-foreground transition-colors duration-150"
             >
               <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
               Talk to an Agent
             </motion.button>
@@ -166,7 +166,7 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
           pointerEvents: 'none',
         }}
       >
-        <AnimatePresence mode="wait">
+        <AnimatePresence mode="popLayout">
           {!menuOpen ? (
             /* ── Collapsed pill ── */
             <motion.button
@@ -205,7 +205,7 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
                 </span>
                 <span className="ml-1 mr-3 flex items-center text-white/25">
                   <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                    <path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M3 5l4 4 4-4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                 </span>
               </div>
@@ -214,7 +214,7 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
               <div className="flex md:hidden items-center gap-3 px-4">
                 <span className="font-heading font-black text-white" style={{ fontSize: 17 }}>adrar</span>
                 <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                  <path d="M3 5l4 4 4-4" stroke="white" strokeOpacity="0.4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                  <path d="M3 5l4 4 4-4" stroke="white" strokeOpacity="0.4" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                 </svg>
               </div>
             </motion.button>
@@ -242,7 +242,7 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
                 exit={{ opacity: 0 }}
-                transition={{ duration: 0.2, delay: 0.12 }}
+                transition={{ duration: 0.15, delay: 0.07 }}
               >
                 {/* Header row */}
                 <div className="flex items-center justify-between px-7 pt-6 pb-5 border-b border-white/8">
@@ -266,7 +266,7 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
                     className="w-8 h-8 flex items-center justify-center rounded-full text-white/40 hover:text-white hover:bg-white/10 transition-colors duration-150"
                   >
                     <svg width="14" height="14" viewBox="0 0 14 14" fill="none">
-                      <path d="M13 1L1 13M1 1l12 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round"/>
+                      <path d="M13 1L1 13M1 1l12 12" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" />
                     </svg>
                   </motion.button>
                 </div>
@@ -298,9 +298,9 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
                           </span>
                           <svg
                             width="16" height="16" viewBox="0 0 16 16" fill="none"
-                            className="text-white/20 group-hover:text-bor-primary transition-colors duration-150 group-hover:translate-x-1 transition-transform"
+                            className="text-white/20 group-hover:text-bor-primary transition-colors duration-150"
                           >
-                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round"/>
+                            <path d="M3 8h10M9 4l4 4-4 4" stroke="currentColor" strokeWidth="1.6" strokeLinecap="round" strokeLinejoin="round" />
                           </svg>
                         </Link>
                       </motion.div>
@@ -323,7 +323,7 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
                     className="flex items-center justify-center gap-2 w-full py-3.5 rounded-full bg-bor-primary text-bor-foreground-inverted text-[13px] font-body font-bold uppercase tracking-wide hover:opacity-90 transition-opacity duration-150"
                   >
                     <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                      <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                     </svg>
                     Talk to an Agent
                   </motion.button>
@@ -398,7 +398,7 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
                     >
                       {link.label}
                       <svg width="14" height="14" viewBox="0 0 14 14" fill="none" className="opacity-30">
-                        <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+                        <path d="M3 7h8M7 3l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
                       </svg>
                     </Link>
                   </motion.div>
@@ -419,7 +419,7 @@ export default function Navbar({ logoUrl, logoAlt = 'Adrar Advertising LLC' }: N
                   className="flex items-center justify-center gap-2 w-full px-6 py-4 rounded-full bg-bor-primary text-bor-foreground-inverted text-[14px] font-body font-bold uppercase tracking-wide"
                 >
                   <svg width="13" height="13" viewBox="0 0 24 24" fill="none">
-                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"/>
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
                   </svg>
                   Talk to an Agent
                 </motion.button>

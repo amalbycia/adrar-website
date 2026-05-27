@@ -141,12 +141,12 @@ export default function AdrarChatbot({ isOpen, onClose, onUnread }: AdrarChatbot
         {isOpen && (
           <motion.div
             key="chat-panel"
-            initial={{ opacity: 0, y: 20, scale: 0.96 }}
+            initial={{ opacity: 0, y: 16, scale: 0.94 }}
             animate={{ opacity: 1, y: 0, scale: 1 }}
-            exit={{ opacity: 0, y: 12, scale: 0.97 }}
-            transition={{ duration: 0.28, ease: [0.25, 1, 0.5, 1] }}
-            className="fixed bottom-24 left-4 md:bottom-28 md:left-8 z-50 w-[calc(100vw-2rem)] max-w-[360px] rounded-2xl overflow-hidden"
-            style={{ boxShadow: '0 24px 64px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06)' }}
+            exit={{ opacity: 0, y: 10, scale: 0.97 }}
+            transition={{ duration: 0.24, ease: [0.22, 1, 0.36, 1] }}
+            className="fixed bottom-[88px] left-4 md:bottom-28 md:left-8 z-50 w-[calc(100vw-2rem)] max-w-[360px] rounded-2xl overflow-hidden max-h-[calc(100svh-120px)] md:max-h-none flex flex-col"
+            style={{ boxShadow: '0 24px 64px rgba(0,0,0,0.18), 0 0 0 1px rgba(0,0,0,0.06)', transformOrigin: 'bottom left' }}
           >
             {/* Header */}
             <div className="flex items-center gap-3 px-4 py-3.5 bg-white border-b border-[#F0F0F0]">
@@ -172,7 +172,7 @@ export default function AdrarChatbot({ isOpen, onClose, onUnread }: AdrarChatbot
 
             {/* Messages */}
             <div
-              className="flex flex-col gap-3 px-4 py-4 overflow-y-auto"
+              className="flex flex-col gap-3 px-4 py-4 overflow-y-auto chat-scroll"
               style={{ height: 320, background: '#FAFAFA' }}
               data-lenis-prevent
             >

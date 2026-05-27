@@ -46,6 +46,8 @@ body {
   font-family: var(--font-body);
   min-height: 100dvh;
   overflow-x: hidden;
+  overscroll-behavior: none;           /* No rubber-band on iOS */
+  -webkit-tap-highlight-color: transparent; /* Remove grey tap flash on iOS */
 }
 
 /* Lenis smooth scroll */
@@ -108,7 +110,7 @@ html.lenis {
 /* ─── Animation classes ────────────────────────────── */
 
 .animate-marquee {
-  animation: marquee 50s linear infinite;
+  animation: marquee 55s linear infinite;
   will-change: transform;
 }
 
@@ -118,22 +120,22 @@ html.lenis {
 }
 
 .animate-marquee-reverse {
-  animation: marquee-reverse 60s linear infinite;
+  animation: marquee-reverse 55s linear infinite;
   will-change: transform;
 }
 
 .animate-scroll-up {
-  animation: scroll-up 22s linear infinite;
+  animation: scroll-up 28s linear infinite;
   will-change: transform;
 }
 
 .animate-scroll-up-slow {
-  animation: scroll-up 30s linear infinite;
+  animation: scroll-up 38s linear infinite;
   will-change: transform;
 }
 
 .animate-scroll-down {
-  animation: scroll-down 26s linear infinite;
+  animation: scroll-down 32s linear infinite;
   will-change: transform;
 }
 
@@ -225,14 +227,29 @@ body {
   text-size-adjust: 100%;
 }
 
-/* Min touch target size for interactive elements */
-button, a, [role="button"] {
+/* ─── Mobile: safe-area insets (notch/home-bar aware) ─── */
+@supports (padding-bottom: env(safe-area-inset-bottom)) {
+  .floating-dock-safe {
+    padding-bottom: env(safe-area-inset-bottom);
+    bottom: calc(1.5rem + env(safe-area-inset-bottom));
+  }
+}
+
+/* Ensure scrollable message list in chat doesn't fight with body overscroll */
+.chat-scroll {
+  overscroll-behavior: contain;
+  -webkit-overflow-scrolling: touch;
+}
+
+/* Min touch target size — only for standalone button / role=button, NOT all anchors */
+button:not(.no-touch-target),
+[role="button"] {
   min-height: 44px;
   min-width: 44px;
 }
 
-/* Exception for inline links and nav items */
-nav a, p a, .inline-link {
+/* Exception: small utility buttons that opt-out */
+.no-touch-target {
   min-height: unset;
   min-width: unset;
 }

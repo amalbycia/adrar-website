@@ -7,15 +7,16 @@ interface FloatingDockProps {
   hasUnread: boolean
 }
 
-const spring = { type: 'spring', stiffness: 480, damping: 30 } as const
+const spring = { type: 'spring', stiffness: 340, damping: 32 } as const
 
 export default function FloatingDock({ onChatOpen, hasUnread }: FloatingDockProps) {
   return (
     <motion.div
       initial={{ opacity: 0, y: 20, scale: 0.9 }}
       animate={{ opacity: 1, y: 0, scale: 1 }}
-      transition={{ type: 'spring', stiffness: 340, damping: 26, delay: 2 }}
-      className="fixed bottom-6 left-6 md:bottom-8 md:left-8 z-50"
+      transition={{ type: 'spring', stiffness: 300, damping: 28, delay: 2 }}
+      style={{ transformOrigin: 'bottom left' }}
+      className="fixed bottom-6 left-6 md:bottom-8 md:left-8 z-50 floating-dock-safe"
     >
       <div
         className="flex flex-row items-center gap-0 rounded-full overflow-hidden"
