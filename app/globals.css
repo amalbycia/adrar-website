@@ -139,6 +139,17 @@ html.lenis {
   will-change: transform;
 }
 
+/* ── Mobile hero marquee (HeroMobile.tsx only) ─────────────────────────────── */
+.animate-marquee-mobile-left {
+  animation: marquee 25s linear infinite;
+  will-change: transform;
+}
+
+.animate-marquee-mobile-right {
+  animation: marquee-reverse 30s linear infinite;
+  will-change: transform;
+}
+
 .animate-whatsapp-ping {
   animation: whatsapp-ping 2.5s ease-in-out infinite;
 }
