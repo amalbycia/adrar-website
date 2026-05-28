@@ -296,13 +296,18 @@ export default function Footer({ logoUrl, logoAlt = 'Adrar Advertising LLC', foo
 
           {/* Middle — Legal Links (shown third on mobile, second on desktop) */}
           <div className="flex flex-wrap items-center justify-center gap-5 lg:gap-8 flex-[1.5] order-3 lg:order-2">
-            {['Privacy policy', 'Terms of use', 'Status page', 'DMCA'].map((link) => (
+            {[
+              { label: 'Privacy policy', href: '/privacy' },
+              { label: 'Terms of use',  href: '/' },
+              { label: 'Status page',   href: '/' },
+              { label: 'DMCA',          href: '/' },
+            ].map(({ label, href }) => (
               <Link
-                key={link}
-                href="/"
+                key={label}
+                href={href}
                 className="font-body text-[14px] text-[#B0B0B0] border-b border-[#B0B0B0]/40 hover:text-white hover:border-white transition-colors pb-0.5"
               >
-                {link}
+                {label}
               </Link>
             ))}
           </div>
